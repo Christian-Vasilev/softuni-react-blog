@@ -5,28 +5,22 @@ import BlogPostNormal from "./BlogPostNormal";
 export default (props) => {
     let blogPostThumb = null;
 
-    switch (props.blogPostType) {
-        case 'video':
-            blogPostThumb = <BlogPostVideoThumb
-                videoUrl={'https://www.youtube.com/watch?v=vKSA_idPZkc'}
-                coverImageUrl={'img/blog/inner_b2.jpg'}
-            />
-            break;
-        case 'music':
-            blogPostThumb = <BlogPostMusicThumb
-                iframeSource={'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/547295505&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true'}
-                coverImageUrl={'img/blog/inner_b2.jpg'}
-            />
-            break;
-        default:
-            blogPostThumb = <BlogPostNormal coverImageUrl={'img/blog/inner_b2.jpg'} />
-            break;
-
-    }
-
     return (
         <div className="bsingle__post mb-50">
-            {blogPostThumb}
+            <div className="bsingle__post-thumb video-p">
+                <form class="box" method="post" action="" enctype="multipart/form-data">
+                    <div class="file-area">
+                        <input type="file" />
+                        <div class="file-dummy">
+                            <span class="default">Click to select a thumb for the article</span>
+                            <img class="success" />
+                        </div>
+                    </div>
+                </form>
+                {/* Image upload form */}
+                {/* VideoURL input */}
+                {/* SpotifyURL input */}
+            </div>
             <div className="bsingle__content">
                 <div className="meta-info">
                     <ul>
