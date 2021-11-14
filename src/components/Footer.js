@@ -1,6 +1,5 @@
-export default () => {
+const Footer = () => {
     return (
-
         <footer className="footer-bg footer-p pt-90">
             <div className="footer-top-heiding">
                 <div className="container">
@@ -37,7 +36,7 @@ export default () => {
 
                             <div className="footer-widget mb-30">
                                 <div className="flog mb-35">
-                                    <a href="#"><img src="img/logo/w_logo.png" alt="logo" /></a>
+                                    <img src="img/logo/w_logo.png" alt="logo" />
                                 </div>
                                 <div className="f-contact">
                                     <ul>
@@ -47,8 +46,7 @@ export default () => {
                                         </li>
                                         <li>
                                             <i className="icon dripicons-mail"></i>
-                                            <span><a href="mailto:info@example.com">info@example.com</a><br /><a
-                                                href="mailto:sale@example.com">sale @example.com</a></span>
+                                            <span>info@example.com<br />sale @example.com</span>
                                         </li>
 
                                     </ul>
@@ -65,12 +63,12 @@ export default () => {
                                 </div>
                                 <div className="footer-link">
                                     <ul>
-                                        <li><a href="#"><i className="fas fa-chevron-right"></i> Partners</a></li>
-                                        <li><a href="#"><i className="fas fa-chevron-right"></i> About Us</a></li>
-                                        <li><a href="#"><i className="fas fa-chevron-right"></i> Career</a></li>
-                                        <li><a href="#"><i className="fas fa-chevron-right"></i> Reviews</a></li>
-                                        <li><a href="#"><i className="fas fa-chevron-right"></i> Terms & Conditions</a></li>
-                                        <li><a href="#"><i className="fas fa-chevron-right"></i> Help</a></li>
+                                        <li><i className="fas fa-chevron-right"></i> Partners</li>
+                                        <li><i className="fas fa-chevron-right"></i> About Us</li>
+                                        <li><i className="fas fa-chevron-right"></i> Career</li>
+                                        <li><i className="fas fa-chevron-right"></i> Reviews</li>
+                                        <li><i className="fas fa-chevron-right"></i> Terms & Conditions</li>
+                                        <li><i className="fas fa-chevron-right"></i> Help</li>
                                     </ul>
                                 </div>
                             </div>
@@ -82,12 +80,12 @@ export default () => {
                                 </div>
                                 <div className="footer-link">
                                     <ul>
-                                        <li><a href="#"><i className="fas fa-chevron-right"></i> Home</a></li>
-                                        <li><a href="#"><i className="fas fa-chevron-right"></i> About Us</a></li>
-                                        <li><a href="#"><i className="fas fa-chevron-right"></i> Services</a></li>
-                                        <li><a href="#"><i className="fas fa-chevron-right"></i> Project</a></li>
-                                        <li><a href="#"><i className="fas fa-chevron-right"></i> Our Team</a></li>
-                                        <li><a href="#"><i className="fas fa-chevron-right"></i> Latest Blog</a></li>
+                                        <li><i className="fas fa-chevron-right"></i> Home</li>
+                                        <li><i className="fas fa-chevron-right"></i> About Us</li>
+                                        <li><i className="fas fa-chevron-right"></i> Services</li>
+                                        <li><i className="fas fa-chevron-right"></i> Project</li>
+                                        <li><i className="fas fa-chevron-right"></i> Our Team</li>
+                                        <li><i className="fas fa-chevron-right"></i> Latest Blog</li>
                                     </ul>
                                 </div>
                             </div>
@@ -102,10 +100,10 @@ export default () => {
                                         scelerisque ullamcorper. Ut id pretium sem. Proin ac consectetur orci.</p>
                                 </div>
                                 <div className="footer-social">
-                                    <a href="#"><i className="fab fa-facebook-f"></i></a>
-                                    <a href="#"><i className="fab fa-twitter"></i></a>
-                                    <a href="#"><i className="fab fa-instagram"></i></a>
-                                    <a href="#"><i className="fab fa-google-plus-g"></i></a>
+                                    <i className="fab fa-facebook-f"></i>
+                                    <i className="fab fa-twitter"></i>
+                                    <i className="fab fa-instagram"></i>
+                                    <i className="fab fa-google-plus-g"></i>
                                 </div>
                             </div>
                         </div>
@@ -126,3 +124,5 @@ export default () => {
         </footer>
     );
 }
+
+export default Footer

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { setUser, getUser } from "../../networking/auth";
+import authUser from "../../hooks/useAuth";
 
 const Login = () => {
     const [email, setEmail] = useState({
@@ -15,10 +15,6 @@ const Login = () => {
     });
 
     const [responseErrorMessage, setResponseErrorMessage] = useState('');
-
-    useEffect(() => {
-        getUser();
-    }, []);
 
     const handleEmailChange = (e) => {
         const emailRegexp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -58,7 +54,7 @@ const Login = () => {
     const handleLoginFormSubmit = (e) => {
         e.preventDefault();
 
-        setUser(email.value, password.value);
+        authUser(email.value, password.value);
     }
 
     return (

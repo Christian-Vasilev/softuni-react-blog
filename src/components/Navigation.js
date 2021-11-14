@@ -1,6 +1,6 @@
 import NavigationItem from "./NavigationItem";
 
-export default () => {
+const Navigation = () => {
     return (
         <div className="col-xl-6 col-lg-6">
             <div className="main-menu text-left pl-15">
@@ -13,3 +13,5 @@ export default () => {
         </div>
     );
 }
+
+export default Navigation;

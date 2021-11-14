@@ -1,4 +1,4 @@
-export default (props) => {
+const NavigationItem = (props) => {
     return (
         <li>
             <a href={props.href}>
@@ -7,3 +7,5 @@ export default (props) => {
         </li>
     );
 }
+
+export default NavigationItem;

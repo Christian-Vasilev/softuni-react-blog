@@ -1,7 +1,11 @@
 import BlogPost from "./BlogPost";
 import Pagination from "../Pagination";
+import AuthContext from "../contexts/AuthContext";
+import { useContext } from "react";
 
 export default () => {
+    const user = useContext(AuthContext);
+
     return (
         <main>
             <section className="breadcrumb-area d-flex align-items-center"

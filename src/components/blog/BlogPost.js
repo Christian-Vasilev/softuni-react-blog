@@ -27,20 +27,20 @@ export default (props) => {
     }
 
     return (
-        <Fragment>
+        <>
             <BlogPostCreate />
             <div className="bsingle__post mb-50">
                 {blogPostThumb}
                 <div className="bsingle__content">
                     <div className="meta-info">
                         <ul>
-                            <li><a href="#"> <i className="far fa-calendar-alt"></i> 7 March, 2019</a></li>
-                            <li><a href="#"><i className="far fa-user"></i>by Zcube</a></li>
+                            <li><i className="far fa-calendar-alt"></i> 7 March, 2019</li>
+                            <li><i className="far fa-user"></i>by Zcube</li>
                             <li><i className="far fa-comments"></i>35 Comments</li>
                         </ul>
                     </div>
-                    <h2><a href="blog-details.html">There are many variations passages of like consectetur lorem ipsum
-                        available.</a></h2>
+                    <h2>There are many variations passages of like consectetur lorem ipsum
+                        available.</h2>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
                         ut labore et
                         dolore magna
@@ -49,11 +49,11 @@ export default (props) => {
                         consequat.
                         Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.</p>
                     <div className="slider-btn">
-                        <a href="#" className="btn ss-btn" data-animation="fadeInRight" data-delay=".8s">Read More</a>
+                        <button className="btn ss-btn" data-animation="fadeInRight" data-delay=".8s">Read More</button>
                     </div>
                 </div>
             </div>
-        </Fragment>
+        </>
         
     )
 }

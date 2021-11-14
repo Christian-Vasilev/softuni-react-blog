@@ -8,12 +8,12 @@ export default (props) => {
     return (
         <div className="bsingle__post mb-50">
             <div className="bsingle__post-thumb video-p">
-                <form class="box" method="post" action="" enctype="multipart/form-data">
-                    <div class="file-area">
+                <form className="box" method="post" action="">
+                    <div className="file-area">
                         <input type="file" />
-                        <div class="file-dummy">
-                            <span class="default">Click to select a thumb for the article</span>
-                            <img class="success" />
+                        <div className="file-dummy">
+                            <span className="default">Click to select a thumb for the article</span>
+                            <img className="success" />
                         </div>
                     </div>
                 </form>

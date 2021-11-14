@@ -1,4 +1,4 @@
-export default () => {
+const HeroButton = () => {
     return (
         <div className="col-xl-4 col-lg-4 d-none d-lg-block">
             <div className="right-menu">
@@ -9,3 +9,5 @@ export default () => {
         </div>
     );
 }
+
+export default HeroButton;
