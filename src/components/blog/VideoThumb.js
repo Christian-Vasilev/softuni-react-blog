@@ -1,4 +1,4 @@
-export default (props) => {
+const VideoThumb = (props) => {
     return (
         <div className="bsingle__post-thumb video-p">
             <img src={props.coverImageUrl} alt="" />
@@ -8,3 +8,5 @@ export default (props) => {
         </div>
     );
 }
+
+export default VideoThumb;

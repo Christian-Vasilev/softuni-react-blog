@@ -1,10 +1,4 @@
-import BlogPostVideoThumb from "./BlogPostVideoThumb";
-import BlogPostMusicThumb from "./BlogPostMusicThumb";
-import BlogPostNormal from "./BlogPostNormal";
-
-export default (props) => {
-    let blogPostThumb = null;
-
+const BlogPostCreate = (props) => {
     return (
         <div className="bsingle__post mb-50">
             <div className="bsingle__post-thumb video-p">
@@ -13,7 +7,7 @@ export default (props) => {
                         <input type="file" />
                         <div className="file-dummy">
                             <span className="default">Click to select a thumb for the article</span>
-                            <img className="success" />
+                            <img className="success" alt="success"/>
                         </div>
                     </div>
                 </form>
@@ -45,3 +39,5 @@ export default (props) => {
         </div>
     )
 }
+
+export default BlogPostCreate;

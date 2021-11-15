@@ -1,5 +1,4 @@
 import axios from "axios";
-import localStorage from "./localStorage";
 
 const httpClient = axios.create({
     baseURL: 'http://localhost:8000',

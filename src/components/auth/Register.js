@@ -11,21 +11,19 @@ const Register = () => {
         message: '',
         value: ''
     });
+
     const [email, setEmail] = useState({
         error: false,
         message: '',
         value: ''
     });
-    const [username, setUsername] = useState({
-        error: false,
-        message: '',
-        value: ''
-    });
+
     const [password, setPassword] = useState({
         error: false,
         message: '',
         value: ''
     });
+
     const [confirmPassword, setConfirmPassword] = useState({
         error: false,
         message: '',
@@ -136,75 +134,90 @@ const Register = () => {
     }
 
     return (
-        <div className="col-lg-6 col-md-6 offset-lg-3 pt-60 pt-md-0">
-            <div className="s-single-services text-center">
-                <div className="forms-icon">
-                    <i className="fa fa-user-plus"></i>
+        <section id="auth" className="pricing-area p-relative pt-120 pb-60">
+            <div className="container">
+                <div className="row justify-content-center">
+                    <div className="col-lg-8">
+                        <div className="section-title center-align mb-60 text-center">
+                            <h2>Регистрация</h2>
+                            <img src="img/bg/circle-line.png" alt="circle" />
+                        </div>
+                    </div>
                 </div>
-                <form name="register-form" onSubmit={handleFormSubmit}  method="post">
-                    <div className="form-row">
-                        <div className="form-group col-md-6">
-                            <input className={`authenticate-form ${firstName.error ? 'is-invalid' : ''}`}
-                                type="text"
-                                id="first-name"
-                                name="firstName"
-                                placeholder="First Name *"
-                                onBlur={handleFirstNameChange}
-                            />
-                            <div className="invalid-feedback">
-                                {firstName.message}
-                            </div>
-                        </div>
-                        <div className="form-group col-md-6">
-                            <input className={`authenticate-form ${lastName.error ? 'is-invalid' : ''}`}
-                                type="text"
-                                name="lastName"
-                                onBlur={handleLastNameChange}
-                                placeholder="Last Name *"
-                            />
-                            <div className="invalid-feedback">
-                                {lastName.message}
-                            </div>
-                        </div>
-                    </div>
-                    <div className="form-group">
-                        <input type="email" className={`authenticate-form ${email.error ? 'is-invalid' : ''}`}
-                            id="email"
-                            name="email"
-                            onBlur={handleEmailChange}
-                            placeholder="Email *"
-                        />
-                        <div className="invalid-feedback">
-                            {email.message}
-                        </div>
-                    </div>
-                    <div className="form-group">
-                        <input type="password"
-                            className={`authenticate-form ${password.error ? 'is-invalid' : ''}`}
-                            name="password"
-                            onBlur={handlePasswordChange}
-                            placeholder="Password" />
-                        <div className="invalid-feedback">
-                            {password.message}
-                        </div>
-                    </div>
-                    <div className="form-group">
-                        <input type="password"
-                            className={`authenticate-form ${confirmPassword.error ? 'is-invalid' : ''}`}
-                            name="password_confirmation"
-                            onBlur={handleConfirmPasswordChange}
-                            placeholder="Repeat Password" />
-                        <div className="invalid-feedback">
-                            {confirmPassword.message}
-                        </div>
-                    </div>
+                <div className="row">
 
-                    <div className="pricing-btn pt-30">
-                        <button type="submit" className="btn">Register</button>
+                    <div className="col-lg-6 col-md-6 offset-lg-3 pt-60 pt-md-0">
+                        <div className="s-single-services text-center">
+                            <div className="forms-icon">
+                                <i className="fa fa-user-plus"></i>
+                            </div>
+                            <form name="register-form" onSubmit={handleFormSubmit} method="post">
+                                <div className="form-row">
+                                    <div className="form-group col-md-6">
+                                        <input className={`authenticate-form ${firstName.error ? 'is-invalid' : ''}`}
+                                            type="text"
+                                            id="first-name"
+                                            name="firstName"
+                                            placeholder="First Name *"
+                                            onBlur={handleFirstNameChange}
+                                        />
+                                        <div className="invalid-feedback">
+                                            {firstName.message}
+                                        </div>
+                                    </div>
+                                    <div className="form-group col-md-6">
+                                        <input className={`authenticate-form ${lastName.error ? 'is-invalid' : ''}`}
+                                            type="text"
+                                            name="lastName"
+                                            onBlur={handleLastNameChange}
+                                            placeholder="Last Name *"
+                                        />
+                                        <div className="invalid-feedback">
+                                            {lastName.message}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="form-group">
+                                    <input type="email" className={`authenticate-form ${email.error ? 'is-invalid' : ''}`}
+                                        id="email"
+                                        name="email"
+                                        onBlur={handleEmailChange}
+                                        placeholder="Email *"
+                                    />
+                                    <div className="invalid-feedback">
+                                        {email.message}
+                                    </div>
+                                </div>
+                                <div className="form-group">
+                                    <input type="password"
+                                        className={`authenticate-form ${password.error ? 'is-invalid' : ''}`}
+                                        name="password"
+                                        onBlur={handlePasswordChange}
+                                        placeholder="Password" />
+                                    <div className="invalid-feedback">
+                                        {password.message}
+                                    </div>
+                                </div>
+                                <div className="form-group">
+                                    <input type="password"
+                                        className={`authenticate-form ${confirmPassword.error ? 'is-invalid' : ''}`}
+                                        name="password_confirmation"
+                                        onBlur={handleConfirmPasswordChange}
+                                        placeholder="Repeat Password" />
+                                    <div className="invalid-feedback">
+                                        {confirmPassword.message}
+                                    </div>
+                                </div>
+
+                                <div className="pricing-btn pt-30">
+                                    <button type="submit" className="btn">Register</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                </form>
+                </div>
             </div>
-        </div>
+        </section>
     );
 }
 

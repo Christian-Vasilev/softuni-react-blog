@@ -1,11 +1,7 @@
 import BlogPost from "./BlogPost";
 import Pagination from "../Pagination";
-import AuthContext from "../contexts/AuthContext";
-import { useContext } from "react";
 
-export default () => {
-    const user = useContext(AuthContext);
-
+const Blog = () => {
     return (
         <main>
             <section className="breadcrumb-area d-flex align-items-center"
@@ -15,7 +11,7 @@ export default () => {
                         <div className="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2">
                             <div className="breadcrumb-wrap text-center">
                                 <div className="breadcrumb-title mb-30">
-                                    <h2>News Feeds</h2>
+                                    <h2>Blog Posts</h2>
                                 </div>
                                 <nav aria-label="breadcrumb">
                                     <ol className="breadcrumb">
@@ -31,37 +27,13 @@ export default () => {
             <section className="inner-blog pt-100 pb-50">
                 <div className="container">
                     <div className="row">
-                        <div className="col-lg-8">
+                        <div className="col-lg-12">
                             <BlogPost blogPostType={'music'} />
                             <Pagination itemsCount={3} />
                         </div>
                         <div className="col-lg-4">
                             <aside>
-                                <div className="widget mb-40">
-                                    <div className="widget-title text-center">
-                                        <h4>Follow Us</h4>
-                                    </div>
-                                    <div className="widget-social text-center">
-                                        <a href="#"><i className="fab fa-twitter"></i></a>
-                                        <a href="#"><i className="fab fa-pinterest-p"></i></a>
-                                        <a href="#"><i className="fab fa-facebook-f"></i></a>
-                                        <a href="#"><i className="fab fa-instagram"></i></a>
-                                        <a href="#"><i className="fab fa-wordpress"></i></a>
-                                    </div>
-                                </div>
-                                <div className="widget mb-40">
-                                    <div className="widget-title text-center">
-                                        <h4>Categories</h4>
-                                    </div>
-                                    <ul className="cat__list">
-                                        <li><a href="#">Lifestyle <span>(05)</span></a></li>
-                                        <li><a href="#">Travel <span>(34)</span></a></li>
-                                        <li><a href="#">Fashion <span>(89)</span></a></li>
-                                        <li><a href="#">Music <span>(92)</span></a></li>
-                                        <li><a href="#">Branding <span>(56)</span></a></li>
-                                    </ul>
-                                </div>
-                                <div className="widget mb-40">
+                                {/* <div className="widget mb-40">
                                     <div className="widget-title text-center">
                                         <h4>Feeds</h4>
                                     </div>
@@ -114,28 +86,7 @@ export default () => {
                                             </li>
                                         </ul>
                                     </div>
-                                </div>
-                                <div className="widget mb-40">
-                                    <div className="widget-title text-center">
-                                        <h4>Tags</h4>
-                                    </div>
-                                    <div className="widget__tag">
-                                        <ul>
-                                            <li><a href="#">Travel</a></li>
-                                            <li><a href="#">Lifestyle</a></li>
-                                            <li><a href="#">Photo</a></li>
-                                            <li><a href="#">Adventures</a></li>
-                                            <li><a href="#">Musician</a></li>
-                                            <li><a href="#">08</a></li>
-                                            <li><a href="#">Travel</a></li>
-                                            <li><a href="#">Lifestyle</a></li>
-                                            <li><a href="#">Photo</a></li>
-                                            <li><a href="#">Adventures</a></li>
-                                            <li><a href="#">Musician</a></li>
-                                            <li><a href="#">08</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
+                                </div> */}
                             </aside>
                         </div>
                     </div>
@@ -144,3 +95,5 @@ export default () => {
         </main>
     )
 }
+
+export default Blog;

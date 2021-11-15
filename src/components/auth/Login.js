@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import authUser from "../../hooks/useAuth";
 
 const Login = () => {
@@ -14,7 +15,7 @@ const Login = () => {
         value: ''
     });
 
-    const [responseErrorMessage, setResponseErrorMessage] = useState('');
+    const history = useHistory();
 
     const handleEmailChange = (e) => {
         const emailRegexp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -54,64 +55,76 @@ const Login = () => {
     const handleLoginFormSubmit = (e) => {
         e.preventDefault();
 
-        authUser(email.value, password.value);
+        authUser(email.value, password.value).then(() => {
+            history.push('/');
+        });
     }
 
     return (
-        <div className="col-lg-6 col-md-6 offset-lg-3">
-            <div className={`alert alert-danger ${responseErrorMessage.length != 0 ? '' : 'd-none'}`}>
-                SUCCESS LOGIN
-            </div>
-            <div className="s-single-services">
-                <div className="text-center w-100">
-                    <div className="forms-icon">
-                        <i className="fa fa-key"></i>
+        <section id="auth" className="pricing-area p-relative pt-120 pb-60">
+            <div className="container">
+                <div className="row justify-content-center">
+                    <div className="col-lg-8">
+                        <div className="section-title center-align mb-60 text-center">
+                            <h2>Вход</h2>
+                            <img src="img/bg/circle-line.png" alt="circle" />
+                        </div>
                     </div>
                 </div>
-                <form name="register-form" onSubmit={handleLoginFormSubmit} method="post">
-                    <div className="form-group">
-                        <input type="email"
-                            className={`authenticate-form ${email.error ? 'is-invalid' : ''}`}
-                            name="email"
-                            onBlur={handleEmailChange}
-                            placeholder="Email *" />
-                        <div className="invalid-feedback">
-                            {email.message}
-                        </div>
-                    </div>
-                    <div className="form-group">
-                        <input type="password"
-                            className={`authenticate-form ${password.error ? 'is-invalid' : ''}`}
-                            name="password"
-                            onBlur={handlePasswordChange}
-                            placeholder="Password *" />
-                        <div className="invalid-feedback">
-                            {password.message}
-                        </div>
-                    </div>
-                    <div className="form-check form-check-inline">
-                        <input type="checkbox" className="form-check-input" id="remember-me" />
-                        <label className="form-check-label">
-                            Запомни ме
-                        </label>
-                    </div>
-                    <div className="form-check form-check-inline float-right">
-                        <a href="#" className="forgotpassword">
-                            Забравена парола?
-                        </a>
-                    </div>
-                    <div className="form-group row pt-30">
-                        <div className="col-lg-6 col-md-6">
-                            <div className="pricing-btn">
-                                <button type="submit" className="w-100 btn">Login</button>
+                <div className="row">
+                    <div className="col-lg-6 col-md-6 offset-lg-3">
+                        <div className="s-single-services">
+                            <div className="text-center w-100">
+                                <div className="forms-icon">
+                                    <i className="fa fa-key"></i>
+                                </div>
                             </div>
-                            <span>Нямаш профил? <a href="{{ route('register') }}" className="forgotpassword">Регистрирай се</a></span>
+                            <form name="register-form" onSubmit={handleLoginFormSubmit} method="post">
+                                <div className="form-group">
+                                    <input type="email"
+                                        className={`authenticate-form ${email.error ? 'is-invalid' : ''}`}
+                                        name="email"
+                                        onBlur={handleEmailChange}
+                                        placeholder="Email *" />
+                                    <div className="invalid-feedback">
+                                        {email.message}
+                                    </div>
+                                </div>
+                                <div className="form-group">
+                                    <input type="password"
+                                        className={`authenticate-form ${password.error ? 'is-invalid' : ''}`}
+                                        name="password"
+                                        onBlur={handlePasswordChange}
+                                        placeholder="Password *" />
+                                    <div className="invalid-feedback">
+                                        {password.message}
+                                    </div>
+                                </div>
+                                <div className="form-check form-check-inline">
+                                    <input type="checkbox" className="form-check-input" id="remember-me" />
+                                    <label className="form-check-label">
+                                        Запомни ме
+                                    </label>
+                                </div>
+                                <div className="form-check form-check-inline float-right">
+                                    <button className="forgotpassword">
+                                        Забравена парола?
+                                    </button>
+                                </div>
+                                <div className="form-group row pt-30">
+                                    <div className="col-lg-6 col-md-6">
+                                        <div className="pricing-btn">
+                                            <button type="submit" className="w-100 btn">Login</button>
+                                        </div>
+                                        <span>Нямаш профил? <button className="forgotpassword">Регистрирай се</button></span>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
-        </div>
-
+        </section>
     );
 }
 

@@ -1,27 +1,26 @@
-import BlogPostVideoThumb from "./BlogPostVideoThumb";
-import BlogPostMusicThumb from "./BlogPostMusicThumb";
-import BlogPostNormal from "./BlogPostNormal";
+import VideoThumb from "./VideoThumb";
+import MusicThumb from "./MusicThumb";
+import DefaultThumb from "./DefaultThumb";
 import BlogPostCreate from "./BlogPostCreate";
-import { Fragment } from "react";
 
-export default (props) => {
+const BlogPost = (props) => {
     let blogPostThumb = null;
 
     switch (props.blogPostType) {
         case 'video':
-            blogPostThumb = <BlogPostVideoThumb
+            blogPostThumb = <VideoThumb
                 videoUrl={'https://www.youtube.com/watch?v=vKSA_idPZkc'}
                 coverImageUrl={'img/blog/inner_b2.jpg'}
             />
             break;
         case 'music':
-            blogPostThumb = <BlogPostMusicThumb
+            blogPostThumb = <MusicThumb
                 iframeSource={'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/547295505&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true'}
                 coverImageUrl={'img/blog/inner_b2.jpg'}
             />
             break;
         default:
-            blogPostThumb = <BlogPostNormal coverImageUrl={'img/blog/inner_b2.jpg'} />
+            blogPostThumb = <DefaultThumb coverImageUrl={'img/blog/inner_b2.jpg'} />
             break;
 
     }
@@ -57,3 +56,5 @@ export default (props) => {
         
     )
 }
+
+export default BlogPost;

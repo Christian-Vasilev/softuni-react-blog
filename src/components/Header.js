@@ -2,7 +2,7 @@ import HeroButton from './HeroButton';
 import Logo from './Logo';
 import Navigation from './Navigation';
 
-export default () => {
+const Header = () => {
     return (
         <header className="header-area in-header">
             <div id="header-sticky" className="menu-area menu-area2">
@@ -22,3 +22,5 @@ export default () => {
         </header>
     );
 }
+
+export default Header;

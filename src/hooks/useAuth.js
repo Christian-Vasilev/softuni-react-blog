@@ -10,6 +10,8 @@ const authUser = async (email, password) => {
 
         localStorage.store('user', user);
     }
+
+    return response;
 }
 
 
