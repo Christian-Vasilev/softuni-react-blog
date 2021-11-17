@@ -591,7 +591,6 @@ label {
 .right-menu li {
     float: left;
     padding: 10px 0px 10px 50px;
-    width: 50%;
 }
 
 .top-btn {
@@ -666,10 +665,6 @@ label {
 .slider-content {
     position: relative;
     z-index: 2;
-}
-
-.sticky-menu ul li a {
-    padding: 16px 0;
 }
 
 .sticky-menu .top-btn {

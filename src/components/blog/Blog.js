@@ -1,7 +1,17 @@
 import BlogPost from "./BlogPost";
 import Pagination from "../Pagination";
+import { useEffect, useState } from "react";
+import useAxios from "../../hooks/useAxios";
 
 const Blog = () => {
+    const [apiRequestUri, setApiRequestUri] = useState('/api/posts');
+    const { data: { data: posts, meta }, isPending } = useAxios(apiRequestUri);
+
+    console.log(apiRequestUri);
+    const handlePaginationApiUriUpdate = (uri) => {
+        return setApiRequestUri(uri)
+    }
+
     return (
         <main>
             <section className="breadcrumb-area d-flex align-items-center"
@@ -27,9 +37,17 @@ const Blog = () => {
             <section className="inner-blog pt-100 pb-50">
                 <div className="container">
                     <div className="row">
-                        <div className="col-lg-12">
-                            <BlogPost blogPostType={'music'} />
-                            <Pagination itemsCount={3} />
+                        <div className="col-lg-8 offset-lg-2">
+                            {!isPending && (
+                               posts.map((post, index) => {
+                                    return <BlogPost key={index} post={post} />
+                               }) 
+                            )}
+
+                            {!isPending && (
+                                <Pagination pagination={meta} handlePaginationApiUriUpdate={handlePaginationApiUriUpdate}/>
+                            )}
+                            
                         </div>
                         <div className="col-lg-4">
                             <aside>

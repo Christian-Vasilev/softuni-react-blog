@@ -9,6 +9,10 @@ const store = (name, data) => {
 const read = (name) => {
     let data = localStorage.getItem(name);
 
+    if (!data) {
+        return {};
+    }
+
     if (typeof JSON.parse(data) === 'object') {
         return JSON.parse(data);
     }

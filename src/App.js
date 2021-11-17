@@ -2,9 +2,8 @@ import Header from './components/Header';
 import Blog from './components/blog/Blog';
 import Footer from './components/Footer';
 import './App.css';
-import AuthContext from './components/contexts/AuthContext';
-import useAxios from './hooks/useAxios';
 import Authorized from './components/auth/Authorized';
+import UserHandler from './components/auth/UserHandler';
 import {
     BrowserRouter as Router,
     Switch,
@@ -14,28 +13,26 @@ import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 
 function App() {
-    const { data: user, isPending } = useAxios('/api/user');
-
     return (
         <div className="App">
-            <AuthContext.Provider value={{user, isPending}}>
-                <Header />
+            <UserHandler>
                 <Router>
-                    <Route to='/login' />
-                    <Route to='/register' />
-
-                    <Switch>
+                    <Header />
                         <Route exact path='/' component={Blog} />
-                        <Authorized path='/login'>
-                            <Login />
-                        </Authorized>
-                        <Authorized path='/register'>
-                            <Register />
-                        </Authorized>
-                    </Switch>
+                        <Route to='/login' />
+                        <Route to='/register' />
+                        
+                        <Switch>
+                            <Authorized path='/login'>
+                                <Login />
+                            </Authorized>
+                            <Authorized path='/register'>
+                                <Register />
+                            </Authorized>
+                        </Switch>
+                    <Footer />
                 </Router>
-                <Footer />
-            </AuthContext.Provider>
+            </UserHandler>
         </div>
     );
 }

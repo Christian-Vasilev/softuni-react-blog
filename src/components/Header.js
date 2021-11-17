@@ -1,8 +1,12 @@
+import { useContext } from 'react';
+import AuthContext from './contexts/AuthContext';
 import HeroButton from './HeroButton';
 import Logo from './Logo';
 import Navigation from './Navigation';
 
 const Header = () => {
+const { user } = useContext(AuthContext);
+
     return (
         <header className="header-area in-header">
             <div id="header-sticky" className="menu-area menu-area2">
@@ -10,8 +14,8 @@ const Header = () => {
                     <div className="second-menu">
                         <div className="row align-items-center">
                             <Logo />
-                            <Navigation />
-                            <HeroButton />
+                            <Navigation user={user}/>
+                            {!user && <HeroButton />}
                             <div className="col-12">
                                 <div className="mobile-menu"></div>
                             </div>
