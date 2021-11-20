@@ -1,7 +1,6 @@
-import VideoThumb from "./VideoThumb";
-import MusicThumb from "./MusicThumb";
-import DefaultThumb from "./DefaultThumb";
-import BlogPostCreate from "./BlogPostCreate";
+import VideoThumb from "../thumbnails/VideoThumb";
+import MusicThumb from "../thumbnails/MusicThumb";
+import DefaultThumb from "../thumbnails/DefaultThumb";
 
 const BlogPost = ({
      post: {

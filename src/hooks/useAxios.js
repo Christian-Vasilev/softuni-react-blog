@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import httpClient from "../components/utils/httpClient";
+import httpClient from "../utils/httpClient";
 
 const useAxios = (endpoint) => {
     const [data, setData] = useState({});

@@ -1,4 +1,4 @@
-import NavigationItem from "./NavigationItem";
+import NavigationItem from "./NavigationItem/NavigationItem";
 
 const Navigation = ({ user }) => {
     return (
@@ -7,7 +7,7 @@ const Navigation = ({ user }) => {
                 <nav id="mobile-menu">
                     <ul>
                         <NavigationItem name="Home" href="/" />
-                        { user && (
+                        { user !== null && (
                             <NavigationItem name="Profile" href="/" />
                         )}
                     </ul>

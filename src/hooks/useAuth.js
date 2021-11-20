@@ -1,5 +1,5 @@
-import httpClient from "../components/utils/httpClient";
-import localStorage from "../components/utils/localStorage";
+import httpClient from "../utils/httpClient";
+import localStorage from "../utils/localStorage";
 
 const authUser = async (email, password) => {
     await httpClient.get('/sanctum/csrf-cookie');

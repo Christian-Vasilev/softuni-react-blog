@@ -1,7 +1,7 @@
-import localStorage from "../utils/localStorage";
-import httpClient from "../utils/httpClient";
+import localStorage from "../../utils/localStorage";
+import httpClient from "../../utils/httpClient";
 import { useEffect, useState } from "react";
-import { AuthContextProvider } from "../contexts/AuthContext";
+import { AuthContextProvider } from "../../contexts/AuthContext";
 
 const UserHandler = ({ children }) => {
     let [user, setUser] = useState(localStorage.read('user'));

@@ -1,7 +1,7 @@
 import { useContext } from 'react';
-import AuthContext from './contexts/AuthContext';
+import AuthContext from '../../contexts/AuthContext';
 import HeroButton from './HeroButton';
-import Logo from './Logo';
+import Logo from '../Logo/Logo';
 import Navigation from './Navigation';
 
 const Header = () => {
