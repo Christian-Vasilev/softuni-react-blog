@@ -1,10 +1,21 @@
 import Header from './Header';
 import Content from './Content';
+import useAxios from '../../hooks/useAxios';
+import { useParams } from 'react-router';
+import SkeletonHeader from './Header/SkeletonHeader';
+import ContentSkeleton from './Content/ContentSkeleton';
+import Author from './Author';
+import AuthorSKeleton from './Author/AuthorSkeleton';
+import CommentSkeleton from './Comment/CommentSkeleton';
+import Comment from './Comment/Comment';
 
 const BlogPostDetails = () => {
+    const { slug } = useParams();
+    const { data: { data: article }, isPending } = useAxios(`/api/posts/${slug}`);
+
     return (
         <>
-            <section className="breadcrumb-area d-flex align-items-center" style={{"background-image": "url(img/testimonial/test-bg.jpg)"}}>
+            <section className="breadcrumb-area d-flex align-items-center" style={{ "background-image": "url(img/testimonial/test-bg.jpg)" }}>
                 <div className="container">
                     <div className="row">
                         <div className="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2">
@@ -28,124 +39,25 @@ const BlogPostDetails = () => {
                     <div className="row">
                         <div className="col-lg-8">
                             <div className="blog-details-wrap">
-                                <Header />
-                                <Content />
-                                <div className="posts_navigation pt-35 pb-35">
-                                    <div className="row align-items-center">
-                                        <div className="col-xl-4 col-md-5">
-                                            <div className="prev-link">
-                                                <span>Prev Post</span>
-                                                <h4><a href="#">Tips on Minimalist</a></h4>
-                                            </div>
-                                        </div>
-                                        <div className="col-xl-4 col-md-2 text-left text-md-center">
-                                            <a href="blog.html" className="blog-filter"><img src="img/icon/c_d01.png" alt="" /></a>
-                                        </div>
-                                        <div className="col-xl-4 col-md-5">
-                                            <div className="next-link text-left text-md-right">
-                                                <span>next Post</span>
-                                                <h4><a href="#">Less Is More</a></h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="avatar__wrap text-center mt-100 mb-45">
-                                    <div className="avatar-img">
-                                        <img src="img/blog/comment/avatar.png" alt="" />
-                                    </div>
-                                    <div className="avatar__info">
-                                        <h5>Rosalina William</h5>
-                                        <div className="avatar__info-social">
-                                            <a href="#"><i className="fab fa-facebook-f"></i></a>
-                                            <a href="#"><i className="fab fa-twitter"></i></a>
-                                            <a href="#"><i className="fab fa-instagram"></i></a>
-                                            <a href="#"><i className="fab fa-behance"></i></a>
-                                            <a href="#"><i className="fab fa-linkedin"></i></a>
-                                        </div>
-                                    </div>
-                                    <div className="avatar__wrap-content">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                                            et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                                            aliquip ex ea commodo consequa aute irure dolor.</p>
-                                    </div>
-                                </div>
+                                {isPending
+                                    ? <SkeletonHeader />
+                                    : <Header author={article.author} image={false} created_at={article.created_at} />}
+                                {isPending
+                                    ? <ContentSkeleton />
+                                    : <Content content={article.content} />}
+                                <div className="posts_navigation pt-35 pb-35"></div>
+                                {isPending
+                                    ? <AuthorSKeleton />
+                                    : <Author author={article.author} />}
                                 <div className="comment__wrap pb-45 mb-45">
                                     <div className="comment__wrap-title">
                                         <h5>Comments</h5>
                                     </div>
                                     <div className="single__comment mb-35">
-                                        <div className="comments-avatar">
-                                            <img src="img/blog/comment/c_01.png" alt="" />
-                                        </div>
-                                        <div className="comment-text">
-                                            <div className="avatar-name mb-15">
-                                                <h6>ALina Kelian</h6>
-                                                <span>19th May 2018</span>
-                                                <a href="#" className="comment-reply"><i className="fas fa-reply"></i>Reply</a>
-                                            </div>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                                                ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                        </div>
-                                    </div>
-                                    <div className="single__comment children mb-35">
-                                        <div className="comments-avatar">
-                                            <img src="img/blog/comment/c_02.png" alt="" />
-                                        </div>
-                                        <div className="comment-text">
-                                            <div className="avatar-name mb-15">
-                                                <h6>Rlex Kelian <i className="fas fa-bookmark"></i></h6>
-                                                <span>19th May 2018</span>
-                                                <a href="#" className="comment-reply"><i className="fas fa-reply"></i>Reply</a>
-                                            </div>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                                                ullamco laboris nisi ut
-                                                aliquip commodo.</p>
-                                        </div>
-                                    </div>
-                                    <div className="single__comment">
-                                        <div className="comments-avatar">
-                                            <img src="img/blog/comment/c_03.png" alt="" />
-                                        </div>
-                                        <div className="comment-text">
-                                            <div className="avatar-name mb-15">
-                                                <h6>Roboto Alex</h6>
-                                                <span>21th May 2018</span>
-                                                <a href="#" className="comment-reply"><i className="fas fa-reply"></i>Reply</a>
-                                            </div>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                                                ullamco laboris nisi ut
-                                                aliquip ex ea commodo consequat.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="post-comments-form mb-50">
-                                    <div className="comment__wrap-title">
-                                        <h5>Post Comment</h5>
-                                    </div>
-                                    <div className="comment-box">
-                                        <form action="#" className="comment__form">
-                                            <div className="comment-field text-area mb-20">
-                                                <i className="fas fa-pencil-alt"></i>
-                                                <textarea name="message" id="message" cols="30" rows="10"
-                                                    placeholder="Type your comments...."></textarea>
-                                            </div>
-                                            <div className="comment-field mb-20">
-                                                <i className="far fa-user"></i>
-                                                <input type="text" placeholder="Type your name...." />
-                                            </div>
-                                            <div className="comment-field mb-20">
-                                                <i className="fas fa-envelope"></i>
-                                                <input type="email" placeholder="Type your email...." />
-                                            </div>
-                                            <div className="comment-field mb-20">
-                                                <i className="fas fa-globe"></i>
-                                                <input type="email" placeholder="Type your website...." />
-                                            </div>
-                                            <button className="btn">Post Comments</button>
-                                        </form>
+
+                                        {isPending
+                                            ? <CommentSkeleton />
+                                            : <Comment />}
                                     </div>
                                 </div>
                             </div>
@@ -284,6 +196,8 @@ const BlogPostDetails = () => {
                 </div>
             </section>
         </>
+
+
     );
 }
 

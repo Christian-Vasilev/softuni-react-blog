@@ -14,7 +14,7 @@ const useAxios = (endpoint) => {
                 setData(response.data);
                 setIsPending(false);
             }
-
+            
             if (response.status == 401) {
                 setIsPending(false);
                 setError(true);

@@ -17,12 +17,12 @@ function App() {
     return (
         <div className="App">
             <UserHandler>
-                {/* <BlogPostDetails /> */}
                 <Router>
                     <Header />
                         <Route exact path='/' component={Blog} />
                         <Route to='/login' />
                         <Route to='/register' />
+                        <Route path='/:slug' component={BlogPostDetails} />
                         
                         <Switch>
                             <Authorized path='/login'>
