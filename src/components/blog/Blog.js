@@ -2,6 +2,7 @@ import BlogPost from "../BlogPost";
 import Pagination from "../Pagination";
 import { useState } from "react";
 import useAxios from "../../hooks/useAxios";
+import Breadcrumb from "../Breadcrumb/Breadcrumb";
 
 
 const Blog = () => {
@@ -14,40 +15,19 @@ const Blog = () => {
 
     return (
         <>
-            <section className="breadcrumb-area d-flex align-items-center"
-                style={{ backgroundImage: 'url(img/testimonial/test-bg.jpg)' }}>
-                <div className="container">
-                    <div className="row">
-                        <div className="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2">
-                            <div className="breadcrumb-wrap text-center">
-                                <div className="breadcrumb-title mb-30">
-                                    <h2>Blog Posts</h2>
-                                </div>
-                                <nav aria-label="breadcrumb">
-                                    <ol className="breadcrumb">
-                                        <li className="breadcrumb-item"><a href="index.html">Home</a></li>
-                                        <li className="breadcrumb-item active" aria-current="page">News</li>
-                                    </ol>
-                                </nav>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <Breadcrumb name="Blog posts"/>
             <section className="inner-blog pt-100 pb-50">
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-8 offset-lg-2">
                             {!isPending && (
-                               posts.map((post, index) => {
-                                    return <BlogPost key={index} post={post} />
-                               }) 
+                                posts.map((post, index) => <BlogPost key={index} post={post} />)
                             )}
 
                             {!isPending && (
-                                <Pagination pagination={meta} handlePaginationApiUriUpdate={handlePaginationApiUriUpdate}/>
+                                <Pagination pagination={meta} handlePaginationApiUriUpdate={handlePaginationApiUriUpdate} />
                             )}
-                            
+
                         </div>
                         <div className="col-lg-4">
                             <aside>

@@ -1,11 +1,11 @@
-const Author = () => {
+const Author = ({ author }) => {
     return (
         <div className="avatar__wrap text-center mt-100 mb-45">
             <div className="avatar-img">
                 <img src="img/blog/comment/avatar.png" alt="" />
             </div>
             <div className="avatar__info">
-                <h5>Rosalina William</h5>
+                <h5>{author.name}</h5>
                 <div className="avatar__info-social">
                     <a href="#"><i className="fab fa-facebook-f"></i></a>
                     <a href="#"><i className="fab fa-twitter"></i></a>

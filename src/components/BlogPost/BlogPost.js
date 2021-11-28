@@ -1,15 +1,15 @@
 import VideoThumb from "../thumbnails/VideoThumb";
 import MusicThumb from "../thumbnails/MusicThumb";
 import DefaultThumb from "../thumbnails/DefaultThumb";
+import ReactMarkdown from 'react-markdown';
 import { Link } from "react-router-dom";
-import { useParams, useRouteMatch } from "react-router";
 
 const BlogPost = ({
     post: {
         id,
         title,
         slug,
-        content,
+        preview_content: content,
         author,
         thumbnails,
         type,
@@ -19,8 +19,6 @@ const BlogPost = ({
         created_at
     }
 }) => {
-    const { url } = useRouteMatch();
-    const { urlId } = useParams();
     let blogPostThumb = null;
 
     switch (type) {
@@ -55,7 +53,7 @@ const BlogPost = ({
                         </ul>
                     </div>
                     <h2>{title}</h2>
-                    <p>{content}</p>
+                    <p><ReactMarkdown>{content}</ReactMarkdown></p>
                     <div className="slider-btn">
                         <Link to={`${slug}`} className="btn ss-btn" data-animation="fadeInRight" data-delay=".8s">Read More</Link>
                     </div>

@@ -2,7 +2,7 @@ const Header = ({ author, created_at, image }) => {
     return (
         <>
             <div className="bsingle__post-thumb mb-30">
-                <img src="img/blog/inner_b1.jpg" alt="" />
+                <img src={image} alt="" />
             </div>
             <div className="meta__info">
                 <ul>

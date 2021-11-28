@@ -10,6 +10,7 @@ const CreateBlogPost = () => {
     const { user } = useContext(AuthContext);
     const [files, setFiles] = useState([]);
     const [postType, setPostType] = useState(2);
+    const [validationErrors, setValidationErrors] = useState({});
     const { getRootProps, getInputProps } = useDropzone({
         accept: 'image/*',
         onDrop: acceptedFiles => {
@@ -58,6 +59,35 @@ const CreateBlogPost = () => {
         setPostType(e.target.value);
     }
 
+    const handleTitleValidation = (e) => {
+        const title = e.target.value.trim();
+        let isInvalid = false;
+        let validationMessage = '';
+
+        if (title.length < 6) {
+            isInvalid = true;
+            validationMessage = 'Title must be atleast 6 symbols';
+        }
+
+        if (title.search(/^[A-Za-z0-9_.]+$/)) {
+            isInvalid = true;
+            validationMessage = 'Title must contain only characters and numbers';
+        }
+
+        if (isInvalid) {
+            e.target.classList.add('is-invalid');
+             setValidationErrors(prevState => {
+                return {
+                    ...prevState,
+                    title: validationMessage
+                }
+            });
+        }
+
+        (!isInvalid && e.target.classList.contains('is-invalid')) 
+            && e.target.classList.remove('is-invalid');
+    }
+
     const handleFormSubmission = (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
@@ -94,8 +124,16 @@ const CreateBlogPost = () => {
                                     </div>
                                     <div className="form-row">
                                         <div className="col">
-                                            <input type="text" name="title" className="form-control" placeholder="Title" />
+                                            <input type="text"
+                                                name="title"
+                                                onBlur={(e) => handleTitleValidation(e)}
+                                                className="form-control"
+                                                placeholder="Title" />
+                                            <div className="invalid-feedback">
+                                                {validationErrors.title}
+                                            </div>
                                         </div>
+
                                         <div className="col">
                                             <select onChange={(e) => handleTypeChange(e)} name="type" className="form-control">
                                                 <option value="2">Normal</option>

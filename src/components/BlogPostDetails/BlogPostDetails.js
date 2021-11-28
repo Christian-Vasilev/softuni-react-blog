@@ -8,6 +8,7 @@ import Author from './Author';
 import AuthorSKeleton from './Author/AuthorSkeleton';
 import CommentSkeleton from './Comment/CommentSkeleton';
 import Comment from './Comment/Comment';
+import Breadcrumb from '../Breadcrumb';
 
 const BlogPostDetails = () => {
     const { slug } = useParams();
@@ -15,25 +16,7 @@ const BlogPostDetails = () => {
 
     return (
         <>
-            <section className="breadcrumb-area d-flex align-items-center" style={{ "background-image": "url(img/testimonial/test-bg.jpg)" }}>
-                <div className="container">
-                    <div className="row">
-                        <div className="col-xl-6 offset-xl-3 col-lg-8 offset-lg-2">
-                            <div className="breadcrumb-wrap text-center">
-                                <div className="breadcrumb-title mb-30">
-                                    <h2>News Details</h2>
-                                </div>
-                                <nav aria-label="breadcrumb">
-                                    <ol className="breadcrumb">
-                                        <li className="breadcrumb-item"><a href="index.html">Home</a></li>
-                                        <li className="breadcrumb-item active" aria-current="page">News Details</li>
-                                    </ol>
-                                </nav>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+        <Breadcrumb name={!isPending ? `${article.title}` : ''} />
             <section className="inner-blog b-details-p pt-100 pb-50">
                 <div className="container">
                     <div className="row">
@@ -41,7 +24,7 @@ const BlogPostDetails = () => {
                             <div className="blog-details-wrap">
                                 {isPending
                                     ? <SkeletonHeader />
-                                    : <Header author={article.author} image={false} created_at={article.created_at} />}
+                                    : <Header author={article.author} image={article.thumbnails[0]} created_at={article.created_at} />}
                                 {isPending
                                     ? <ContentSkeleton />
                                     : <Content content={article.content} />}
