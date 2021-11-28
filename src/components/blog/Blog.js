@@ -3,6 +3,7 @@ import Pagination from "../Pagination";
 import { useState } from "react";
 import useAxios from "../../hooks/useAxios";
 
+
 const Blog = () => {
     const [apiRequestUri, setApiRequestUri] = useState('/api/posts');
     const { data: { data: posts, meta }, isPending } = useAxios(apiRequestUri);

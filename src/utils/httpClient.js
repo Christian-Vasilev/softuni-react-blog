@@ -13,6 +13,6 @@ httpClient.interceptors.response.use(response => {
 });
 
 httpClient.defaults.headers.post['Content-Type'] = 'application/json';
-httpClient.defaults.headers.common['Accept'] = '*/*';
+httpClient.defaults.headers.common['Accept'] = 'application/json';
 
 export default httpClient;

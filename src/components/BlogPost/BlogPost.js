@@ -1,14 +1,17 @@
 import VideoThumb from "../thumbnails/VideoThumb";
 import MusicThumb from "../thumbnails/MusicThumb";
 import DefaultThumb from "../thumbnails/DefaultThumb";
+import { Link } from "react-router-dom";
+import { useParams, useRouteMatch } from "react-router";
 
 const BlogPost = ({
-     post: {
+    post: {
         id,
         title,
         slug,
         content,
         author,
+        thumbnails,
         type,
         video_url,
         iframe_source,
@@ -16,12 +19,15 @@ const BlogPost = ({
         created_at
     }
 }) => {
+    const { url } = useRouteMatch();
+    const { urlId } = useParams();
     let blogPostThumb = null;
+
     switch (type) {
         case 'video':
             blogPostThumb = <VideoThumb
                 videoUrl={video_url}
-                coverImageUrl={'img/blog/inner_b2.jpg'}
+                coverImageUrl={thumbnails[0]}
             />
             break;
         case 'music':
@@ -31,7 +37,7 @@ const BlogPost = ({
             />
             break;
         default:
-            blogPostThumb = <DefaultThumb coverImageUrl={'img/blog/inner_b2.jpg'} />
+            blogPostThumb = <DefaultThumb coverImageUrl={thumbnails[0]} />
             break;
 
     }
@@ -51,12 +57,12 @@ const BlogPost = ({
                     <h2>{title}</h2>
                     <p>{content}</p>
                     <div className="slider-btn">
-                        <button className="btn ss-btn" data-animation="fadeInRight" data-delay=".8s">Read More</button>
+                        <Link to={`${slug}`} className="btn ss-btn" data-animation="fadeInRight" data-delay=".8s">Read More</Link>
                     </div>
                 </div>
             </div>
         </>
-        
+
     )
 }
 

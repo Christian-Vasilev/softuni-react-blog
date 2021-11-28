@@ -287,8 +287,6 @@ label {
 
 .btn {
     -moz-user-select: none;
-    background: transparent linear-gradient(90deg, #ffae25 0%, #07CCEC 100%) 0% 0% no-repeat padding-box;
-    box-shadow: 3px 4px 15px #3FB0CEA6;
     border: none;
     border-radius: 8px;
     color: #fff;
@@ -313,9 +311,11 @@ label {
     color: #fff;
 }
 
-.btn:hover::before {
-    opacity: 0;
+.btn.btn-primary {
+    background-color: #ffae25;
+    box-shadow: 3px 4px 15px #ffae25;
 }
+
 
 .breadcrumb>.active {
     color: #888;

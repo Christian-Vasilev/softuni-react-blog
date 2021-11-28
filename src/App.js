@@ -11,7 +11,8 @@ import {
 } from 'react-router-dom';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
-import BlogPostDetails from './components/BlogPostDetails/BlogPostDetails';
+import BlogPostDetails from './components/BlogPostDetails';
+import CreateBlogPost from './components/CreateBlogPost';
 
 function App() {
     return (
@@ -19,19 +20,16 @@ function App() {
             <UserHandler>
                 <Router>
                     <Header />
+                    <Switch>
+                        <Authorized path='/post/create'>
+                            <CreateBlogPost />
+                        </Authorized>
+                        <Route path='/login' component={Login} />
+                        <Route path='/register' component={Register} />
+                        <Route exact path='/:slug' component={BlogPostDetails} />
                         <Route exact path='/' component={Blog} />
-                        <Route to='/login' />
-                        <Route to='/register' />
-                        <Route path='/:slug' component={BlogPostDetails} />
-                        
-                        <Switch>
-                            <Authorized path='/login'>
-                                <Login />
-                            </Authorized>
-                            <Authorized path='/register'>
-                                <Register />
-                            </Authorized>
-                        </Switch>
+                        <Route to='/post/create' />
+                    </Switch>
                     <Footer />
                 </Router>
             </UserHandler>

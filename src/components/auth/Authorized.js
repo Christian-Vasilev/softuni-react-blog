@@ -6,14 +6,14 @@ import {
 } from 'react-router-dom';
 
 const Authorized = ({ location, children, ...rest }) => {
-    const { user } = useContext(AuthContext);
+    const { isLoggedIn } = useContext(AuthContext);
 
     return (
         <Route
             {...rest}
             render={
                 ({ location }) =>
-                !user 
+                isLoggedIn 
                     ? children
                     : <Redirect to={{ pathname: "/", state: { from: location } }} />
             }
