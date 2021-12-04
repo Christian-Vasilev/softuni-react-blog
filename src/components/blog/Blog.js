@@ -12,6 +12,7 @@ const Blog = () => {
     const handlePaginationApiUriUpdate = (uri) => {
         return setApiRequestUri(uri)
     }
+    console.log(posts);
 
     return (
         <>

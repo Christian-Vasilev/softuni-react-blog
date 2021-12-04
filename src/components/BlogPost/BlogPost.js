@@ -29,8 +29,9 @@ const BlogPost = ({
             />
             break;
         case 'music':
+            console.log(`https://w.soundcloud.com/player/?url=${iframe_source}&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true`);
             blogPostThumb = <MusicThumb
-                iframeSource={'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/547295505&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true'}
+                iframeSource={`https://w.soundcloud.com/player/?url=${iframe_source}&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true`}
                 coverImageUrl={'img/blog/inner_b2.jpg'}
             />
             break;
@@ -53,7 +54,7 @@ const BlogPost = ({
                         </ul>
                     </div>
                     <h2>{title}</h2>
-                    <p><ReactMarkdown>{content}</ReactMarkdown></p>
+                    <ReactMarkdown>{content}</ReactMarkdown>
                     <div className="slider-btn">
                         <Link to={`${slug}`} className="btn ss-btn" data-animation="fadeInRight" data-delay=".8s">Read More</Link>
                     </div>

@@ -16,7 +16,7 @@ const BlogPostDetails = () => {
 
     return (
         <>
-        <Breadcrumb name={!isPending ? `${article.title}` : ''} />
+            <Breadcrumb name={!isPending ? `${article.title}` : ''} />
             <section className="inner-blog b-details-p pt-100 pb-50">
                 <div className="container">
                     <div className="row">

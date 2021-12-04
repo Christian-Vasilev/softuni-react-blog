@@ -1,0 +1,27 @@
+.blog-inner-header-placeholder {
+    display: flex;
+    height: 448px;
+    width: 750px;
+    background: #c8c8c8;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: 600;
+}
+
+.dashed-border {
+    border: 2px dashed #5c5c5c;
+}
+
+.image-remove {
+    position: absolute;
+    top: 5px;
+    right: 24px;
+}
+
+.blog-inner-header-placeholder p {
+    font-size: 1.5rem;
+}

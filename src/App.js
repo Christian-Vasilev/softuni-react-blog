@@ -13,6 +13,7 @@ import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import BlogPostDetails from './components/BlogPostDetails';
 import CreateBlogPost from './components/CreateBlogPost';
+import EditBlogPost from './components/EditBlogPost';
 
 function App() {
     return (
@@ -27,6 +28,7 @@ function App() {
                         <Route path='/login' component={Login} />
                         <Route path='/register' component={Register} />
                         <Route exact path='/:slug' component={BlogPostDetails} />
+                        <Route exact path='/:slug/edit' component={EditBlogPost} />
                         <Route exact path='/' component={Blog} />
                         <Route to='/post/create' />
                     </Switch>
