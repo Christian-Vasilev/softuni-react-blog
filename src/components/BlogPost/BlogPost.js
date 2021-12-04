@@ -3,6 +3,7 @@ import MusicThumb from "../thumbnails/MusicThumb";
 import DefaultThumb from "../thumbnails/DefaultThumb";
 import ReactMarkdown from 'react-markdown';
 import { Link } from "react-router-dom";
+import BlogPostDelete from "../BlogPostDelete";
 
 const BlogPost = ({
     post: {
@@ -58,6 +59,10 @@ const BlogPost = ({
                     <div className="slider-btn">
                         <Link to={`${slug}`} className="btn ss-btn" data-animation="fadeInRight" data-delay=".8s">Read More</Link>
                     </div>
+                    <div className="slider-btn ml-1">
+                        <Link to={`${slug}/edit`} className="btn ss-btn" data-animation="fadeInRight" data-delay=".8s">Edit</Link>
+                    </div>
+                    <BlogPostDelete slug={slug} />
                 </div>
             </div>
         </>

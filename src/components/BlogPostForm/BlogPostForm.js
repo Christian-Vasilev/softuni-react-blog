@@ -6,7 +6,6 @@ import styles from './resources/create-blog-post.css';
 const BlogPostForm = ({
     article = null,
     type = 'edit',
-    isPending = false,
     handleFormSubmission,
     user
 }) => {

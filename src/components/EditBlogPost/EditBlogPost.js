@@ -24,7 +24,6 @@ const EditBlogPost = () => {
         <>
             {!isPending && (
                 <BlogPostForm article={article}
-                    isPending={isPending}
                     user={user}
                     handleFormSubmission={handleFormSubmission} />
             )}
