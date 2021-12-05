@@ -14,6 +14,7 @@ import Register from './components/auth/Register';
 import BlogPostDetails from './components/BlogPostDetails';
 import CreateBlogPost from './components/CreateBlogPost';
 import EditBlogPost from './components/EditBlogPost';
+import ForgotPassword from './components/ForgotPassword/ForgotPassword';
 
 function App() {
     return (
@@ -27,6 +28,7 @@ function App() {
                         </Authorized>
                         <Route path='/login' component={Login} />
                         <Route path='/register' component={Register} />
+                        <Route path='/reset-password' component={ForgotPassword} />
                         <Route exact path='/:slug' component={BlogPostDetails} />
                         <Route exact path='/:slug/edit' component={EditBlogPost} />
                         <Route exact path='/' component={Blog} />

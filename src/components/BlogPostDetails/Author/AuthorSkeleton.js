@@ -1,5 +1,6 @@
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
+import { Link } from 'react-router-dom';
 
 const AuthorSkeleton = () => {
     return (
@@ -12,8 +13,8 @@ const AuthorSkeleton = () => {
                 <div className="avatar__info-social">
                     {Array(5)
                         .fill()
-                        .map((item) => (
-                            <a><Skeleton width={25} height={25} /></a>
+                        .map((item, index) => (
+                            <Link to='/' key={index}><Skeleton width={25} height={25} /></Link>
                         ))}
                 </div>
             </div>

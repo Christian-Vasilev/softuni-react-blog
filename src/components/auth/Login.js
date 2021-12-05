@@ -1,63 +1,22 @@
-import { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import authUser from "../../hooks/useAuth";
+import { useForm } from 'react-hook-form';
 
 const Login = () => {
-    const [email, setEmail] = useState({
-        error: false,
-        message: '',
-        value: ''
-    });
-
-    const [password, setPassword] = useState({
-        error: false,
-        message: '',
-        value: ''
-    });
-
     const history = useHistory();
+    const {
+        register,
+        handleSubmit,
+        formState: { errors }
+    } = useForm();
 
-    const handleEmailChange = (e) => {
-        const emailRegexp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        const value = e.target.value.trim();
-        let message = '';
-        let error = false;
+    const handleLoginFormSubmit = (formData) => {
 
-        if (!emailRegexp.test(value)) {
-            error = true;
-            message = 'Invalid email address';
-        }
-
-        setEmail({
-            error,
-            message,
-            value
-        })
-    }
-
-    const handlePasswordChange = (e) => {
-        const value = e.target.value;
-        let message = '';
-        let error = false;
-
-        if (value.length < 6) {
-            error = true;
-            message = 'Password must be atleast 6 symbols';
-        }
-
-        setPassword({
-            error,
-            message,
-            value
-        });
-    }
-
-    const handleLoginFormSubmit = (e) => {
-        e.preventDefault();
-
-        authUser(email.value, password.value).then(() => {
-            history.push('/');
-        });
+        console.log(formData);
+        authUser({ ...formData })
+            .then(() => {
+                history.push('/');
+            });
     }
 
     return (
@@ -66,7 +25,7 @@ const Login = () => {
                 <div className="row justify-content-center">
                     <div className="col-lg-8">
                         <div className="section-title center-align mb-60 text-center">
-                            <h2>Вход</h2>
+                            <h2>Login</h2>
                             <img src="img/bg/circle-line.png" alt="circle" />
                         </div>
                     </div>
@@ -79,44 +38,49 @@ const Login = () => {
                                     <i className="fa fa-key"></i>
                                 </div>
                             </div>
-                            <form name="register-form" onSubmit={handleLoginFormSubmit} method="post">
+                            <form onSubmit={handleSubmit((data) => handleLoginFormSubmit(data))}>
                                 <div className="form-group">
                                     <input type="email"
-                                        className={`authenticate-form ${email.error ? 'is-invalid' : ''}`}
-                                        name="email"
-                                        onBlur={handleEmailChange}
+                                        {...register('email', {
+                                            required: 'The Email field is required'
+                                        })}
+                                        className={`authenticate-form ${errors.email ? 'is-invalid' : ''}`}
                                         placeholder="Email *" />
                                     <div className="invalid-feedback">
-                                        {email.message}
+                                        {errors.email?.message}
                                     </div>
                                 </div>
                                 <div className="form-group">
                                     <input type="password"
-                                        className={`authenticate-form ${password.error ? 'is-invalid' : ''}`}
-                                        name="password"
-                                        onBlur={handlePasswordChange}
+                                        className={`authenticate-form ${errors.password ? 'is-invalid' : ''}`}
+                                        {...register('password', {
+                                            required: 'The Password field is required'
+                                        })}
                                         placeholder="Password *" />
                                     <div className="invalid-feedback">
-                                        {password.message}
+                                        {errors.password?.message}
                                     </div>
                                 </div>
                                 <div className="form-check form-check-inline">
-                                    <input type="checkbox" className="form-check-input" id="remember-me" />
+                                    <input type="checkbox"
+                                        {...register('remember')}
+                                        className="form-check-input"
+                                        id="remember" />
                                     <label className="form-check-label">
-                                        Запомни ме
+                                        Remember me
                                     </label>
                                 </div>
                                 <div className="form-check form-check-inline float-right">
-                                    <button className="forgotpassword">
-                                        Забравена парола?
-                                    </button>
+                                    <Link to='/reset-password' className="forgotpassword">
+                                        Forgotten password?
+                                    </Link>
                                 </div>
                                 <div className="form-group row pt-30">
                                     <div className="col-lg-6 col-md-6">
-                                        <div className="pricing-btn">
+                                        <div className="pricing-btn pb-10">
                                             <button type="submit" className="w-100 btn">Login</button>
                                         </div>
-                                        <span>Нямаш профил? <button className="forgotpassword">Регистрирай се</button></span>
+                                        <span>Don't have a profile? <Link to='/register' className="forgotpassword">Register</Link></span>
                                     </div>
                                 </div>
                             </form>

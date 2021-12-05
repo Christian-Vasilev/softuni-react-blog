@@ -10,13 +10,13 @@ const UserHandler = ({ children }) => {
     useEffect(() => {
         httpClient.get('/api/user')
         .then(response => {
-            if (response.status == 200) {
+            if (response.status === 200) {
                 localStorage.store('user', response.data);
                 setUser(response.data);
                 setIsLoggedIn(true);
             }
 
-            if (response.status == 401) {
+            if (response.status === 401) {
                 localStorage.remove('user');
                 setUser({});
                 setIsLoggedIn(false);

@@ -7,7 +7,6 @@ import BlogPostDelete from "../BlogPostDelete";
 
 const BlogPost = ({
     post: {
-        id,
         title,
         slug,
         preview_content: content,
@@ -16,9 +15,9 @@ const BlogPost = ({
         type,
         video_url,
         iframe_source,
-        is_approved,
-        created_at
-    }
+        created_at,
+    },
+    handlePostDelete
 }) => {
     let blogPostThumb = null;
 
@@ -62,11 +61,10 @@ const BlogPost = ({
                     <div className="slider-btn ml-1">
                         <Link to={`${slug}/edit`} className="btn ss-btn" data-animation="fadeInRight" data-delay=".8s">Edit</Link>
                     </div>
-                    <BlogPostDelete slug={slug} />
+                    <BlogPostDelete slug={slug} handlePostDelete={handlePostDelete}/>
                 </div>
             </div>
         </>
-
     )
 }
 

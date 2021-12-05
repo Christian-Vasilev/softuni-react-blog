@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import httpClient from "../utils/httpClient";
 
 const useAxios = (endpoint) => {
-    const [data, setData] = useState({});
+    const [response, setResponse] = useState({});
     const [isPending, setIsPending] = useState(true);
     const [error, setError] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
@@ -10,12 +10,12 @@ const useAxios = (endpoint) => {
     useEffect(() => {
         httpClient.get(endpoint)
         .then(response => {
-            if (response.status == 200) {
-                setData(response.data);
+            if (response.status === 200) {
+                setResponse(response.data);
                 setIsPending(false);
             }
             
-            if (response.status == 401) {
+            if (response.status === 401) {
                 setIsPending(false);
                 setError(true);
                 setErrorMessage(response.data.message)
@@ -24,7 +24,8 @@ const useAxios = (endpoint) => {
     }, [endpoint]);
 
     return {
-        data,
+        response,
+        setResponse,
         isPending,
         error,
         errorMessage,

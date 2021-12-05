@@ -1,4 +1,4 @@
-const store = (name, data) => {
+export const store = (name, data) => {
     if (typeof data === 'object') {
         data = JSON.stringify(data);
     }
@@ -6,7 +6,7 @@ const store = (name, data) => {
     localStorage.setItem(name, data);
 }
 
-const read = (name) => {
+export const read = (name) => {
     let data = localStorage.getItem(name);
 
     if (!data) {
@@ -20,7 +20,7 @@ const read = (name) => {
     return data;
 }
 
-const remove = (name) => {
+export const remove = (name) => {
     localStorage.removeItem(name);
 }
 

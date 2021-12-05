@@ -7,8 +7,11 @@ const Navigation = ({ user }) => {
                 <nav id="mobile-menu">
                     <ul>
                         <NavigationItem name="Home" href="/" />
-                        { user !== null && (
+                        {user && (
+                            <>
                             <NavigationItem name="Profile" href="/" />
+                            <NavigationItem name="Create post" href="/post/create" />
+                            </>
                         )}
                     </ul>
                 </nav>

@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Author = ({ author }) => {
     return (
         <div className="avatar__wrap text-center mt-100 mb-45">
@@ -7,11 +9,11 @@ const Author = ({ author }) => {
             <div className="avatar__info">
                 <h5>{author.name}</h5>
                 <div className="avatar__info-social">
-                    <a href="#"><i className="fab fa-facebook-f"></i></a>
-                    <a href="#"><i className="fab fa-twitter"></i></a>
-                    <a href="#"><i className="fab fa-instagram"></i></a>
-                    <a href="#"><i className="fab fa-behance"></i></a>
-                    <a href="#"><i className="fab fa-linkedin"></i></a>
+                    <Link to='/'><i className="fab fa-facebook-f"></i></Link>
+                    <Link to='/'><i className="fab fa-twitter"></i></Link>
+                    <Link to='/'><i className="fab fa-instagram"></i></Link>
+                    <Link to='/'><i className="fab fa-behance"></i></Link>
+                    <Link to='/'><i className="fab fa-linkedin"></i></Link>
                 </div>
             </div>
             <div className="avatar__wrap-content">

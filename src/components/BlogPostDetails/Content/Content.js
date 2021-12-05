@@ -1,4 +1,5 @@
 import ReactMarkdown from 'react-markdown';
+import { Link } from 'react-router-dom';
 
 const Content = ({ content }) => {
     return (
@@ -9,11 +10,11 @@ const Content = ({ content }) => {
                     <div className="post__share text-right">
                         <h5>Social Share</h5>
                         <ul>
-                            <li><a href="#"><i className="fab fa-twitter"></i></a></li>
-                            <li><a href="#"><i className="fab fa-pinterest-p"></i></a></li>
-                            <li><a href="#"><i className="fab fa-facebook-f"></i></a></li>
-                            <li><a href="#"><i className="fab fa-instagram"></i></a></li>
-                            <li><a href="#"><i className="fab fa-gg"></i></a></li>
+                            <li><Link to='/'><i className="fab fa-twitter"></i></Link></li>
+                            <li><Link to='/'><i className="fab fa-pinterest-p"></i></Link></li>
+                            <li><Link to='/'><i className="fab fa-facebook-f"></i></Link></li>
+                            <li><Link to='/'><i className="fab fa-instagram"></i></Link></li>
+                            <li><Link to='/'><i className="fab fa-gg"></i></Link></li>
                         </ul>
                     </div>
                 </div>

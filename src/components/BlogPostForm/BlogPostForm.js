@@ -27,6 +27,8 @@ const BlogPostForm = ({
                     ]);
                 }
                 reader.readAsDataURL(file);
+
+                return file;
             });
         },
     });
@@ -150,7 +152,7 @@ const BlogPostForm = ({
                                                 <option value="3">Music</option>
                                             </select>
                                         </div>
-                                        {postType != 2 && (
+                                        {postType !== 2 && (
                                             <div className="col">
                                                 <input type="text"
                                                     name="resource"
