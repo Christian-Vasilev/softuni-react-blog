@@ -11,8 +11,6 @@ const Login = () => {
     } = useForm();
 
     const handleLoginFormSubmit = (formData) => {
-
-        console.log(formData);
         authUser({ ...formData })
             .then(() => {
                 history.push('/');

@@ -1,137 +1,27 @@
-import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useHistory } from "react-router-dom";
+import authUser from "../../hooks/useAuth";
 
 const Register = () => {
-    const [firstName, setFirstName] = useState({
-        error: false,
-        message: '',
-        value: ''
-    });
-    const [lastName, setLastName] = useState({
-        error: false,
-        message: '',
-        value: ''
-    });
+    const history = useHistory();
 
-    const [email, setEmail] = useState({
-        error: false,
-        message: '',
-        value: ''
-    });
+    const {
+        register,
+        watch,
+        formState: { errors },
+        handleSubmit
+    } = useForm();
 
-    const [password, setPassword] = useState({
-        error: false,
-        message: '',
-        value: ''
-    });
+    const handleFormSubmit = (formData) => {
+        formData.name = `${formData.first_name} ${formData.last_name}`
 
-    const [confirmPassword, setConfirmPassword] = useState({
-        error: false,
-        message: '',
-        value: ''
-    });
-
-    // Handle controlled components
-    const handleFirstNameChange = (e) => {
-        const value = e.target.value.trim();
-        let message = '';
-        let error = false;
-
-        if (value.length < 3) {
-            error = true;
-            message = 'First name is too short';
-        }
-
-        setFirstName({
-            error,
-            message,
-            value
-        });
-    }
-
-    const handleLastNameChange = (e) => {
-        const value = e.target.value.trim();
-        let message = '';
-        let error = false;
-
-        if (value.length < 3) {
-            error = true;
-            message = 'Last name is too short';
-        }
-
-        setLastName({
-            error,
-            message,
-            value
-        });
-    }
-
-    const handleEmailChange = (e) => {
-        const emailRegexp = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        const value = e.target.value.trim();
-        let message = '';
-        let error = false;
-
-        if (!emailRegexp.test(value)) {
-            error = true;
-            message = 'Invalid email address';
-        }
-
-        setEmail({
-            error,
-            message,
-            value
-        })
-    }
-
-    const handlePasswordChange = (e) => {
-        const value = e.target.value.trim();
-        let message = '';
-        let error = false;
-
-        if (value.length < 6) {
-            error = true;
-            message = 'Password must be atleast 6 symbols';
-        }
-
-        setPassword({
-            error,
-            message,
-            value
-        });
-    }
-
-    const handleConfirmPasswordChange = (e) => {
-        const value = e.target.value.trim();
-        let message = '';
-        let error = false;
-
-        if (value.length < 6) {
-            error = true;
-            message = 'Repeated password must be atleast 6 symbols';
-        }
-
-        console.log(password.value === value);
-        if (!(password.value === value)) {
-            error = true;
-            message = 'Both passwords must match';
-
-            setPassword({
-                error,
-                message,
-                value
+        authUser(formData, true)
+            .then(() => {
+                history.push('/');
             });
-        }
-
-        setConfirmPassword({
-            error,
-            message,
-            value
-        });
     }
 
-    const handleFormSubmit = (e) => {
-        e.preventDefault();
-    }
+    let { password } = watch();
 
     return (
         <section id="auth" className="pricing-area p-relative pt-120 pb-60">
@@ -139,73 +29,83 @@ const Register = () => {
                 <div className="row justify-content-center">
                     <div className="col-lg-8">
                         <div className="section-title center-align mb-60 text-center">
-                            <h2>Регистрация</h2>
+                            <h2>Register</h2>
                             <img src="img/bg/circle-line.png" alt="circle" />
                         </div>
                     </div>
                 </div>
                 <div className="row">
-
                     <div className="col-lg-6 col-md-6 offset-lg-3 pt-60 pt-md-0">
                         <div className="s-single-services text-center">
                             <div className="forms-icon">
                                 <i className="fa fa-user-plus"></i>
                             </div>
-                            <form name="register-form" onSubmit={handleFormSubmit} method="post">
+                            <form onSubmit={handleSubmit((data) => handleFormSubmit(data))}>
                                 <div className="form-row">
                                     <div className="form-group col-md-6">
-                                        <input className={`authenticate-form ${firstName.error ? 'is-invalid' : ''}`}
+                                        <input className={`authenticate-form ${errors.first_name ? 'is-invalid' : ''}`}
                                             type="text"
                                             id="first-name"
-                                            name="firstName"
+                                            {...register('first_name', {
+                                                required: 'The First Name field is required'
+                                            })}
                                             placeholder="First Name *"
-                                            onBlur={handleFirstNameChange}
                                         />
                                         <div className="invalid-feedback">
-                                            {firstName.message}
+                                            {errors.first_name?.message}
                                         </div>
                                     </div>
                                     <div className="form-group col-md-6">
-                                        <input className={`authenticate-form ${lastName.error ? 'is-invalid' : ''}`}
+                                        <input className={`authenticate-form ${errors.last_name ? 'is-invalid' : ''}`}
                                             type="text"
-                                            name="lastName"
-                                            onBlur={handleLastNameChange}
+                                            {...register('last_name', {
+                                                required: 'The Last Name field is required'
+                                            })}
                                             placeholder="Last Name *"
                                         />
                                         <div className="invalid-feedback">
-                                            {lastName.message}
+                                            {errors.last_name?.message}
                                         </div>
                                     </div>
                                 </div>
                                 <div className="form-group">
-                                    <input type="email" className={`authenticate-form ${email.error ? 'is-invalid' : ''}`}
+                                    <input type="email" className={`authenticate-form ${errors.email ? 'is-invalid' : ''}`}
                                         id="email"
-                                        name="email"
-                                        onBlur={handleEmailChange}
+                                        {...register('email', {
+                                            required: 'The Email field is required'
+                                        })}
                                         placeholder="Email *"
                                     />
                                     <div className="invalid-feedback">
-                                        {email.message}
+                                        {errors.email?.message}
                                     </div>
                                 </div>
                                 <div className="form-group">
                                     <input type="password"
-                                        className={`authenticate-form ${password.error ? 'is-invalid' : ''}`}
-                                        name="password"
-                                        onBlur={handlePasswordChange}
+                                        className={`authenticate-form ${errors.password ? 'is-invalid' : ''}`}
+                                        {...register('password', {
+                                            required: 'The password field is required',
+                                            minLength: {
+                                                value: 6,
+                                                message: "The minimal password length is 6 symbols"
+                                            }
+                                        })}
                                         placeholder="Password" />
                                     <div className="invalid-feedback">
-                                        {password.message}
+                                        {errors.password?.message}
                                     </div>
                                 </div>
                                 <div className="form-group">
                                     <input type="password"
-                                        className={`authenticate-form ${confirmPassword.error ? 'is-invalid' : ''}`}
-                                        name="password_confirmation"
-                                        onBlur={handleConfirmPasswordChange}
+                                        className={`authenticate-form ${errors.password_confirmation ? 'is-invalid' : ''}`}
+                                        {...register('password_confirmation', {
+                                            required: 'The Repeat Password is required',
+                                            validate: value =>
+                                                value === password || "The passwords do not match"
+                                        })}
                                         placeholder="Repeat Password" />
                                     <div className="invalid-feedback">
-                                        {confirmPassword.message}
+                                        {errors.password_confirmation?.message}
                                     </div>
                                 </div>
 
