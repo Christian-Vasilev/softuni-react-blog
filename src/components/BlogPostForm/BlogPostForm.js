@@ -1,5 +1,6 @@
 import { useDropzone } from 'react-dropzone';
 import { useState, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
 import classNames from 'classnames';
 import styles from './resources/create-blog-post.css';
 
@@ -7,11 +8,17 @@ const BlogPostForm = ({
     article = null,
     type = 'edit',
     handleFormSubmission,
-    user
 }) => {
     const [files, setFiles] = useState([]);
     const [postType, setPostType] = useState(2);
-    const [validationErrors, setValidationErrors] = useState({});
+    const {
+        register,
+        handleSubmit,
+        setValue,
+        reset,
+        formState: { errors }
+    } = useForm();
+
     const { getRootProps, getInputProps } = useDropzone({
         accept: 'image/*',
         onDrop: acceptedFiles => {
@@ -28,6 +35,8 @@ const BlogPostForm = ({
                 }
                 reader.readAsDataURL(file);
 
+                setValue('thumbnail', file);
+    
                 return file;
             });
         },
@@ -51,22 +60,12 @@ const BlogPostForm = ({
     const removeImage = cx({
         'd-none': !files.length,
     });
-    
+
     const handleTypeChange = (e) => {
         setPostType(e.target.value);
     }
 
-    const handleFormData = (e) => {
-        e.preventDefault();
-
-        const formData = new FormData(e.currentTarget);
-
-        if (files.length) {
-            formData.append('thumbnail', files[0]);
-        }
-
-        formData.append('user_id', user.id);
-
+    const handleFormData = (formData) => {
         return handleFormSubmission(formData);
     }
 
@@ -80,35 +79,6 @@ const BlogPostForm = ({
         setFiles([]);
     }
 
-    const handleTitleValidation = (e) => {
-        const title = e.target.value.trim();
-        let isInvalid = false;
-        let validationMessage = '';
-
-        if (title.length < 6) {
-            isInvalid = true;
-            validationMessage = 'Title must be atleast 6 symbols';
-        }
-
-        if (title.search(/^[A-Za-z0-9_.-\s]+$/)) {
-            isInvalid = true;
-            validationMessage = 'Title must contain only characters and numbers';
-        }
-
-        if (isInvalid) {
-            e.target.classList.add('is-invalid');
-            setValidationErrors(prevState => {
-                return {
-                    ...prevState,
-                    title: validationMessage
-                }
-            });
-        }
-
-        (!isInvalid && e.target.classList.contains('is-invalid'))
-            && e.target.classList.remove('is-invalid');
-    }
-
     return (
         <section className="inner-blog b-details-p pt-100 pb-50">
             <div className="container">
@@ -116,13 +86,22 @@ const BlogPostForm = ({
                     <div className="col-lg-8 offset-lg-2">
                         <div className="bsingle__post mb-50">
                             <div className="blog-details-wrap">
-                                <form method="POST" action="" onSubmit={(e) => handleFormData(e)}>
+                                <form onSubmit={handleSubmit((data) => handleFormData(data))}>
                                     <div className="bsingle__post-thumb mb-30">
                                         <div {...getRootProps({ className: 'dropzone' })}
                                             className={imageContainerDiv}
                                             style={{ 'backgroundImage': `url(${loadPreviewImageUrl()})` }}
                                         >
-                                            <input {...getInputProps()} />
+                                            <div className="form-group">
+                                                <input {...register('thumbnail', {
+                                                    required: 'The Thumbnail field is required'
+                                                })} {...getInputProps()}
+                                                    className={`${imageContainerContent} ${errors.thumbnail ? 'is-invalid' : ''}`} />
+
+                                                <div className="invalid-feedback">
+                                                    {errors.thumbnail?.message}
+                                                </div>
+                                            </div>
                                             <p className={imageContainerContent}>
                                                 Drag and drop or select to change the Thumbnail
                                             </p>
@@ -135,18 +114,26 @@ const BlogPostForm = ({
                                     <div className="form-row">
                                         <div className="col">
                                             <input type="text"
-                                                name="title"
-                                                onBlur={(e) => handleTitleValidation(e)}
-                                                className="form-control"
+                                                {...register('title', {
+                                                    required: 'The Title field is required',
+                                                    minLength: {
+                                                        value: 6,
+                                                        message: 'Minimum title length is 6 symbols'
+                                                    }
+                                                })}
+                                                className={`form-control ${errors.title ? 'is-invalid' : ''}`}
                                                 defaultValue={article && article.title}
                                                 placeholder="Title" />
                                             <div className="invalid-feedback">
-                                                {validationErrors.title}
+                                                {errors.title?.message}
                                             </div>
                                         </div>
 
                                         <div className="col">
-                                            <select onChange={(e) => handleTypeChange(e)} name="type" className="form-control">
+                                            <select
+                                                onChange={(e) => handleTypeChange(e)}
+                                                {...register('type')}
+                                                className="form-control">
                                                 <option value="2">Normal</option>
                                                 <option value="1">Video</option>
                                                 <option value="3">Music</option>
@@ -155,7 +142,7 @@ const BlogPostForm = ({
                                         {postType !== 2 && (
                                             <div className="col">
                                                 <input type="text"
-                                                    name="resource"
+                                                    {...register('resource')}
                                                     className="form-control"
                                                     placeholder="Resource Link" />
                                             </div>
@@ -164,10 +151,19 @@ const BlogPostForm = ({
                                             <textarea
                                                 cols="10"
                                                 rows="10"
-                                                name="content"
-                                                className="form-control mt-20"
+                                                {...register('content', {
+                                                    required: 'The Content field is required',
+                                                    minLength: {
+                                                        value: 20,
+                                                        message: 'The minimum content required is 20 symbols'
+                                                    }
+                                                })}
+                                                className={`form-control mt-20 ${errors.content ? 'is-invalid' : ''}`}
                                                 defaultValue={article && article.content}>
                                             </textarea>
+                                            <div className="invalid-feedback">
+                                                {errors.content?.message}
+                                            </div>
                                         </div>
                                         <div className="col-12 mt-20">
                                             <button className="btn btn-primary">{type.toUpperCase()}</button>

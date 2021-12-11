@@ -1,25 +1,29 @@
 
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import AuthContext from '../../contexts/AuthContext';
-import useAxios from '../../hooks/useAxios';
 import { useParams } from 'react-router-dom';
 import BlogPostForm from '../BlogPostForm';
-import httpClient from '../../utils/httpClient';
+import { edit, show } from '../../services/postService';
+import { buildFormDataFromJson } from '../../utils/helper';
 
 const EditBlogPost = () => {
     const { user } = useContext(AuthContext);
+    const [article, setArticle] = useState({});
+    const [isPending, setIsPending] = useState(true);
     const { slug } = useParams();
-    const { data: { data: article }, isPending } = useAxios(`/api/posts/${slug}`);
+
+    useEffect(() => {
+        show(slug).then(response => {
+            setArticle(response.data.data);
+            setIsPending(false);
+        });
+    }, []);
 
     const handleFormSubmission = (formData) => {
-        formData.append('_method', 'PATCH');
-        console.log(Object.fromEntries(formData));
-
-        httpClient.post(`/api/posts/${slug}`, formData, {
-            headers: { 'Content-Type': 'multipart/form-data' },
-        });
+        edit(slug, buildFormDataFromJson(formData, { user_id: user.id }))
+            .then(response => console.log(response));
     }
-    
+
     return (
         <>
             {!isPending && (

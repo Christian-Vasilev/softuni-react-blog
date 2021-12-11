@@ -1,19 +1,20 @@
-import { useContext } from 'react';
+import { create } from '../../services/postService';
 import AuthContext from '../../contexts/AuthContext';
-import httpClient from '../../utils/httpClient';
 import BlogPostForm from '../BlogPostForm';
-
-const handleFormSubmission = (formData) => {
-    httpClient.post('/api/posts', formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-    });
-}
+import { useContext } from 'react';
+import { buildFormDataFromJson } from '../../utils/helper';
 
 const CreateBlogPost = () => {
     const { user } = useContext(AuthContext);
 
+    const handleFormSubmission = (formData) => {
+        formData.user_id = user.id
+
+        create(buildFormDataFromJson(formData));
+    }
+
     return (
-        <BlogPostForm user={user} type='create' handleFormSubmission={handleFormSubmission} />
+        <BlogPostForm type='create' handleFormSubmission={handleFormSubmission} />
     );
 }
 

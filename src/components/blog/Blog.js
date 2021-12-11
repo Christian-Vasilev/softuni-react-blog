@@ -1,8 +1,8 @@
 import BlogPost from "../BlogPost";
 import { useState } from "react";
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
-import httpClient from "../../utils/httpClient";
 import { useEffect } from "react";
+import { getAll, destroy } from "../../services/postService";
 
 
 const Blog = () => {
@@ -10,10 +10,9 @@ const Blog = () => {
     const [hasError, setHasError] = useState(null)
 
     useEffect(() => {
-        httpClient.get('/api/posts')
-            .then(response => {
-                setPosts(response.data.data);
-            });
+        getAll().then(response => {
+            setPosts(response.data.data);
+        });
     }, [hasError]);
 
     const handlePostDelete = (slug) => {
@@ -26,9 +25,7 @@ const Blog = () => {
         ]);
 
         if (confirmDelete) {
-            httpClient.post(`/api/posts/${slug}`, {
-                "_method": 'DELETE'
-            }).then(response => {
+            destroy(slug).then(response => {
                 if (response.statusText != 'OK') {
                     setHasError('error');
                 }
