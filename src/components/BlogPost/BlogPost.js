@@ -4,6 +4,8 @@ import DefaultThumb from "../thumbnails/DefaultThumb";
 import ReactMarkdown from 'react-markdown';
 import { Link } from "react-router-dom";
 import BlogPostDelete from "../BlogPostDelete";
+import { useContext } from "react";
+import AuthContext from "../../contexts/AuthContext";
 
 const BlogPost = ({
     post: {
@@ -20,6 +22,7 @@ const BlogPost = ({
     handlePostDelete
 }) => {
     let blogPostThumb = null;
+    const { user } = useContext(AuthContext);
 
     switch (type) {
         case 'video':
@@ -41,6 +44,7 @@ const BlogPost = ({
 
     }
 
+    console.log(author.id, user.id);
     return (
         <>
             <div className="bsingle__post mb-50">
@@ -58,10 +62,21 @@ const BlogPost = ({
                     <div className="slider-btn">
                         <Link to={`${slug}`} className="btn ss-btn" data-animation="fadeInRight" data-delay=".8s">Read More</Link>
                     </div>
-                    <div className="slider-btn ml-1">
-                        <Link to={`${slug}/edit`} className="btn ss-btn" data-animation="fadeInRight" data-delay=".8s">Edit</Link>
-                    </div>
-                    <BlogPostDelete slug={slug} handlePostDelete={handlePostDelete}/>
+                    {author.id === user.id || user.is_admin
+                        ? (
+                            <>
+                                <div className="slider-btn ml-1">
+                                    <Link to={`${slug}/edit`} className="btn ss-btn" data-animation="fadeInRight" data-delay=".8s">Edit</Link>
+                                </div>
+                                <div className="slider-btn ml-1">
+                                    <button className="btn ss-btn" onClick={() => handlePostDelete(slug)} style={{ 'backgroundColor': '#fb2f2f' }} data-animation="fadeInRight" data-delay=".8s">
+                                        Delete
+                                    </button>
+                                </div>
+                            </>
+                        )
+                        : null}
+
                 </div>
             </div>
         </>

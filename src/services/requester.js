@@ -1,5 +1,4 @@
 import axios from "axios";
-import { edit } from "./postService";
 
 const apiVersion = '/api';
 const POST = 'POST';
@@ -9,7 +8,7 @@ const PATCH = 'PATCH';
 const DELETE = 'DELETE';
 
 const httpClient = axios.create({
-    baseURL: 'http://localhost:8000',
+    baseURL: process.env.REACT_APP_API_BASE_URL,
     withCredentials: true,
     origin: true,
 });
@@ -35,14 +34,11 @@ const request = (url, method, data = {}) => {
     }
 
     switch (method) {
-        case 'POST':
-            return httpClient.post(url, data);
         case 'GET':
             return httpClient.get(url);
+        case 'POST':
         case 'PUT':
-            return httpClient.post(url, data);
         case 'PATCH':
-            return httpClient.post(url, data);
         case 'DELETE':
             return httpClient.post(url, data);
     }

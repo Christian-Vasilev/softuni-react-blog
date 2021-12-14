@@ -1,5 +1,5 @@
 
-export const buildFormDataFromJson = (data, additionalParams = {}) => {
+export const buildFormDataFromObj = (data, additionalParams = {}) => {
     const formData = new FormData();
     data = { ...data, ...additionalParams };
 

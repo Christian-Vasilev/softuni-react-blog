@@ -1,6 +1,5 @@
 import Header from './Header';
 import Content from './Content';
-import useAxios from '../../hooks/useAxios';
 import { useParams } from 'react-router';
 import SkeletonHeader from './Header/SkeletonHeader';
 import ContentSkeleton from './Content/ContentSkeleton';
@@ -9,10 +8,21 @@ import AuthorSKeleton from './Author/AuthorSkeleton';
 import CommentSkeleton from './Comment/CommentSkeleton';
 import Comment from './Comment/Comment';
 import Breadcrumb from '../Breadcrumb';
+import { useEffect, useState } from 'react';
+import { show } from '../../services/postService';
 
 const BlogPostDetails = () => {
     const { slug } = useParams();
-    const { data: { data: article }, isPending } = useAxios(`/api/posts/${slug}`);
+    const [article, setArticle] = useState({});
+    const [isPending, setIsPending] = useState(true);
+
+    useEffect(() => {
+        show(slug)
+            .then(response => {
+                setArticle(response.data.data);
+                setIsPending(false);
+            })
+    }, []);
 
     return (
         <>

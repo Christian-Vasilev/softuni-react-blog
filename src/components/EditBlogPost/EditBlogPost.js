@@ -4,7 +4,7 @@ import AuthContext from '../../contexts/AuthContext';
 import { useParams } from 'react-router-dom';
 import BlogPostForm from '../BlogPostForm';
 import { edit, show } from '../../services/postService';
-import { buildFormDataFromJson } from '../../utils/helper';
+import { buildFormDataFromObj } from '../../utils/helper';
 
 const EditBlogPost = () => {
     const { user } = useContext(AuthContext);
@@ -20,7 +20,7 @@ const EditBlogPost = () => {
     }, []);
 
     const handleFormSubmission = (formData) => {
-        edit(slug, buildFormDataFromJson(formData, { user_id: user.id }))
+        edit(slug, buildFormDataFromObj(formData, { user_id: user.id }))
             .then(response => console.log(response));
     }
 

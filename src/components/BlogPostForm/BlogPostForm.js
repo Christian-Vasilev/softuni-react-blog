@@ -15,7 +15,7 @@ const BlogPostForm = ({
         register,
         handleSubmit,
         setValue,
-        reset,
+        watch,
         formState: { errors }
     } = useForm();
 
@@ -78,6 +78,7 @@ const BlogPostForm = ({
         e.stopPropagation();
         setFiles([]);
     }
+    console.log(article);
 
     return (
         <section className="inner-blog b-details-p pt-100 pb-50">
@@ -93,9 +94,11 @@ const BlogPostForm = ({
                                             style={{ 'backgroundImage': `url(${loadPreviewImageUrl()})` }}
                                         >
                                             <div className="form-group">
-                                                <input {...register('thumbnail', {
-                                                    required: 'The Thumbnail field is required'
-                                                })} {...getInputProps()}
+                                                <input {...register('thumbnail', 
+                                                    article?.slug ? {} : {
+                                                        required: 'The Thumbnail field is required',
+                                                    }
+                                                )} {...getInputProps()}
                                                     className={`${imageContainerContent} ${errors.thumbnail ? 'is-invalid' : ''}`} />
 
                                                 <div className="invalid-feedback">
