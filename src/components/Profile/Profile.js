@@ -37,7 +37,7 @@ const Profile = () => {
 
     return (
         <>
-            <Breadcrumb name="Blog posts" />
+            <Breadcrumb name={`${user.name} Profile`} />
             <section className="inner-blog pt-100 pb-50">
                 <div className="container">
                     <div className="row">
