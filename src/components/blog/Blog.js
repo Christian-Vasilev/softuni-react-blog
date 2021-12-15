@@ -1,37 +1,19 @@
 import BlogPost from "../BlogPost";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
 import { useEffect } from "react";
 import { getAll, destroy } from "../../services/postService";
-
+import AuthContext from "../../contexts/AuthContext";
 
 const Blog = () => {
     const [posts, setPosts] = useState(null)
-    const [hasError, setHasError] = useState(null)
+    const { user } = useContext(AuthContext);
 
     useEffect(() => {
         getAll().then(response => {
             setPosts(response.data.data);
         });
-    }, [hasError]);
-
-    const handlePostDelete = (slug) => {
-        const confirmDelete = window.confirm('Delete this post?');
-
-        setPosts([
-            ...posts.filter((post) => {
-                return post.slug !== slug
-            })
-        ]);
-
-        if (confirmDelete) {
-            destroy(slug).then(response => {
-                if (response.statusText != 'OK') {
-                    setHasError('error');
-                }
-            });
-        }
-    }
+    }, [user]);
 
     return (
         <>
@@ -41,8 +23,8 @@ const Blog = () => {
                     <div className="row">
                         {posts && (
                             posts.map((post, index) => (
-                                <div className="col-lg-6">
-                                    <BlogPost key={index} post={post} handlePostDelete={handlePostDelete} />
+                                <div key={index} className="col-lg-6">
+                                    <BlogPost post={post} />
                                 </div>
                             ))
                         )}

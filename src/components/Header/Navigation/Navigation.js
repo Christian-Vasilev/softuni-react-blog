@@ -1,3 +1,4 @@
+import { isObjectEmpty } from "../../../utils/helper";
 import NavigationItem from "./NavigationItem/NavigationItem";
 
 const Navigation = ({ user }) => {
@@ -7,12 +8,18 @@ const Navigation = ({ user }) => {
                 <nav id="mobile-menu">
                     <ul>
                         <NavigationItem name="Home" href="/" />
-                        {user && (
-                            <>
-                            <NavigationItem name="Profile" href="/" />
-                            <NavigationItem name="Create post" href="/post/create" />
-                            </>
-                        )}
+                        {!isObjectEmpty(user)
+                            ? (
+                                <>
+                                    <NavigationItem name="Profile" href="/profile" />
+                                    <NavigationItem name="Create post" href="/post/create" />
+                                </>
+                            ) : (
+                                <>
+                                    <NavigationItem name="Login" href="/login" />
+                                    <NavigationItem name="Register" href="/register" />
+                                </>
+                            )}
                     </ul>
                 </nav>
             </div>

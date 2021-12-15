@@ -14,28 +14,33 @@ import Register from './components/auth/Register';
 import BlogPostDetails from './components/BlogPostDetails';
 import CreateBlogPost from './components/CreateBlogPost';
 import EditBlogPost from './components/EditBlogPost';
-import ForgotPassword from './components/ForgotPassword/ForgotPassword';
+import ForgotPassword from './components/ForgotPassword';
+import Profile from './components/Profile';
 
 function App() {
     return (
         <div className="App">
             <UserHandler>
+                <Header />
                 <Router>
-                    <Header />
                     <Switch>
                         <Authorized path='/post/create'>
                             <CreateBlogPost />
+                        </Authorized>
+                        <Authorized path='/:slug/edit'>
+                            <EditBlogPost />
+                        </Authorized>
+                        <Authorized path='/profile'>
+                            <Profile />
                         </Authorized>
                         <Route path='/login' component={Login} />
                         <Route path='/register' component={Register} />
                         <Route path='/reset-password' component={ForgotPassword} />
                         <Route exact path='/:slug' component={BlogPostDetails} />
-                        <Route exact path='/:slug/edit' component={EditBlogPost} />
                         <Route exact path='/' component={Blog} />
-                        <Route to='/post/create' />
                     </Switch>
-                    <Footer />
                 </Router>
+                <Footer />
             </UserHandler>
         </div>
     );
