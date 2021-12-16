@@ -1,9 +1,12 @@
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
-import authUser from "../../hooks/useAuth";
+import AuthContext from "../../contexts/AuthContext";
+import { register as RegisterUser } from "../../services/userService";
 
 const Register = () => {
     const history = useHistory();
+    const { setUser } = useContext(AuthContext);
 
     const {
         register,
@@ -15,8 +18,9 @@ const Register = () => {
     const handleFormSubmit = (formData) => {
         formData.name = `${formData.first_name} ${formData.last_name}`
 
-        authUser(formData, true)
-            .then(() => {
+        RegisterUser(formData, true)
+            .then((response) => {
+                setUser(response.data);
                 history.push('/');
             });
     }

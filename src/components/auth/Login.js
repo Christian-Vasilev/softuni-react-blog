@@ -1,9 +1,12 @@
 import { Link, useHistory } from "react-router-dom";
-import authUser from "../../hooks/useAuth";
 import { useForm } from 'react-hook-form';
+import { login } from "../../services/userService";
+import { useContext } from "react";
+import AuthContext from "../../contexts/AuthContext";
 
 const Login = () => {
     const history = useHistory();
+    const { setUser } = useContext(AuthContext);
     const {
         register,
         handleSubmit,
@@ -11,8 +14,9 @@ const Login = () => {
     } = useForm();
 
     const handleLoginFormSubmit = (formData) => {
-        authUser({ ...formData })
-            .then(() => {
+        login({ ...formData })
+            .then(response => {
+                setUser(response.data.data);
                 history.push('/');
             });
     }
