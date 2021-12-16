@@ -2,7 +2,7 @@ import { useLocation } from "react-router-dom";
 import EmailForm from "./partials/EmailForm";
 import PasswordResetForm from "./partials/PasswordResetForm";
 import { useForm } from 'react-hook-form'
-import httpClient from "../../utils/httpClient";
+import { passwordEmail, passwordReset } from "../../services/userService";
 
 const ForgotPassword = () => {
     const {
@@ -11,29 +11,30 @@ const ForgotPassword = () => {
         handleSubmit,
         reset,
         formState: { errors }
-    } = useForm({deepNest: {
-        email: '',
-        password: '',
-        password_confirmation: '',
-    }});
+    } = useForm({
+        deepNest: {
+            email: '',
+            password: '',
+            password_confirmation: '',
+        }
+    });
 
     const searchParams = new URLSearchParams(useLocation().search)
     const token = searchParams.get('token');
 
     const handleFormSubmit = (formData) => {
         formData.token = token;
-        const endpoint = ('password' in formData)
-            ? '/api/password/reset'
-            : '/api/password/email';
-        
-        httpClient.post(endpoint, formData)
-            .then(response => {
-                if (response.statusText != 'OK') {
-                    console.error(response.data.errors);
-                } else {
-                    reset()
-                }
-            });
+        const request = ('password' in formData)
+            ? passwordReset()
+            : passwordEmail();
+
+        request.then(response => {
+            if (response.statusText != 'OK') {
+                console.error(response.data.errors);
+            } else {
+                reset()
+            }
+        });
     }
 
     return (
@@ -54,8 +55,8 @@ const ForgotPassword = () => {
                                 <i className="fa fa-unlock-alt"></i>
                             </div>
                             <form onSubmit={handleSubmit((data) => handleFormSubmit(data))}>
-                                {token 
-                                    ? <PasswordResetForm registerInput={register} errors={errors} watch={watch} /> 
+                                {token
+                                    ? <PasswordResetForm registerInput={register} errors={errors} watch={watch} />
                                     : <EmailForm registerInput={register} errors={errors} watch={watch} />}
                                 <div className="pricing-btn pt-30">
                                     <button type="submit" className="btn">Reset</button>

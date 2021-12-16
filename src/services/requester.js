@@ -22,8 +22,10 @@ httpClient.interceptors.response.use(response => {
 httpClient.defaults.headers.post['Content-Type'] = 'application/json';
 httpClient.defaults.headers.common['Accept'] = 'application/json';
 
-const request = (url, method, data = {}) => {
-    url = apiVersion + url;
+const request = (url, method, data = {}, excludeApiVersioning = false) => {
+    if (!excludeApiVersioning) {
+        url = apiVersion + url;
+    }
 
     if (method !== POST && method !== GET) {
         if (data instanceof FormData) {

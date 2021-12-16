@@ -1,14 +1,14 @@
 import localStorage from "../../utils/localStorage";
-import httpClient from "../../utils/httpClient";
 import { useEffect, useState } from "react";
 import { AuthContextProvider } from "../../contexts/AuthContext";
+import { getUser } from "../../services/userService";
 
 const UserHandler = ({ children }) => {
     let [user, setUser] = useState(localStorage.read('user'));
     let [isLoggedIn, setIsLoggedIn] = useState(true);
 
     useEffect(() => {
-        httpClient.get('/api/user')
+        getUser()
         .then(response => {
             if (response.status === 200) {
                 localStorage.store('user', response.data);

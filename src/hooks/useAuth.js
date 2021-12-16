@@ -1,12 +1,12 @@
-import httpClient from "../utils/httpClient";
+import { csrfCookie, register, login } from "../services/userService";
 import localStorage from "../utils/localStorage";
 
-const authUser = async (credentials, register = false) => {
-    await httpClient.get('/sanctum/csrf-cookie');
+const authUser = async (credentials, registered = false) => {
+    await csrfCookie('/sanctum/csrf-cookie');
     let response;
 
-    if (register) {
-        response = await httpClient.post('/api/register', credentials);
+    if (registered) {
+        response = await register(credentials);
 
         if (response.statusText === 'Created') {
             const { email, password } = credentials;
@@ -14,7 +14,7 @@ const authUser = async (credentials, register = false) => {
         }
     }
 
-    response = await httpClient.post('/api/login', credentials);
+    response = await login(credentials);
 
     if (response.status === 200) {
         const user = response.data.data;
