@@ -2,7 +2,7 @@ import BlogPost from "../BlogPost";
 import { useContext, useState } from "react";
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
 import { useEffect } from "react";
-import { getAll, destroy } from "../../services/postService";
+import { getAll } from "../../services/postService";
 import AuthContext from "../../contexts/AuthContext";
 
 const Blog = () => {
@@ -11,7 +11,7 @@ const Blog = () => {
 
     useEffect(() => {
         getAll().then(response => {
-            setPosts(response.data.data);
+            setPosts(response.data);
         });
     }, [user]);
 

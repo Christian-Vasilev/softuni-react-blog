@@ -59,7 +59,7 @@ const BlogPost = ({
                     <div className="slider-btn">
                         <Link to={`${slug}`} className="btn ss-btn" data-animation="fadeInRight" data-delay=".8s">Read More</Link>
                     </div>
-                    {handlePostDelete && author.id === user.id || user.is_admin
+                    {handlePostDelete && author.id === user.id || user?.is_admin
                         ? (
                             <>
                                 <div className="slider-btn ml-1">

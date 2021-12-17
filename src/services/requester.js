@@ -13,11 +13,24 @@ const httpClient = axios.create({
     origin: true,
 });
 
-httpClient.interceptors.response.use(response => {
-    return response;
-}, ({ response }) => {
-    return response;
-});
+httpClient.interceptors.response.use(
+    (response) => {
+        return response.data
+    },
+    ({ response }) => {
+
+        if (typeof response == 'undefined') {
+            
+            return {
+                success: false,
+                message: 'Unknown error on our backend',
+            }
+        }
+
+        const { data } = response;
+
+        return data;
+    });
 
 httpClient.defaults.headers.post['Content-Type'] = 'application/json';
 httpClient.defaults.headers.common['Accept'] = 'application/json';
@@ -43,6 +56,8 @@ const request = (url, method, data = {}, excludeApiVersioning = false) => {
         case 'PATCH':
         case 'DELETE':
             return httpClient.post(url, data);
+        default:
+            return httpClient.get(url);
     }
 }
 

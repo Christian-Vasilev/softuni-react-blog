@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { login } from "../../services/userService";
 import { useContext } from "react";
 import AuthContext from "../../contexts/AuthContext";
+import { displayNotification } from "../../utils/helper";
 
 const Login = () => {
     const history = useHistory();
@@ -16,8 +17,17 @@ const Login = () => {
     const handleLoginFormSubmit = (formData) => {
         login({ ...formData })
             .then(response => {
-                setUser(response.data.data);
-                history.push('/');
+                if (!response.success) {
+                    displayNotification(response.message);
+
+                    return;
+                }
+
+                setUser(response.data);
+                displayNotification(response.message);
+                setTimeout(() => {
+                    history.push('/');
+                }, 1000);
             });
     }
 

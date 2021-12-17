@@ -12,7 +12,7 @@ const EditBlogPost = () => {
     const [isPending, setIsPending] = useState(true);
     const { slug } = useParams();
 
-    useEffect(() => {
+    useEffect((slug) => {
         show(slug).then(response => {
             setArticle(response.data.data);
             setIsPending(false);

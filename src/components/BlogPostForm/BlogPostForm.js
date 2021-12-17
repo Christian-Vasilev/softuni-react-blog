@@ -15,7 +15,6 @@ const BlogPostForm = ({
         register,
         handleSubmit,
         setValue,
-        watch,
         formState: { errors }
     } = useForm();
 
@@ -78,7 +77,6 @@ const BlogPostForm = ({
         e.stopPropagation();
         setFiles([]);
     }
-    console.log(article);
 
     return (
         <section className="inner-blog b-details-p pt-100 pb-50">

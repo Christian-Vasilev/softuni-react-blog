@@ -22,7 +22,7 @@ const BlogPostDetails = () => {
                 setArticle(response.data.data);
                 setIsPending(false);
             })
-    }, []);
+    }, [slug]);
 
     return (
         <>

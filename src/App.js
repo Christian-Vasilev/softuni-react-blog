@@ -1,9 +1,9 @@
 import Header from './components/Header';
 import Blog from './components/Blog';
 import Footer from './components/Footer';
-import './App.css';
 import Authorized from './components/auth/Authorized';
 import UserHandler from './components/auth/UserHandler';
+import { ToastContainer } from 'react-toastify'
 import {
     BrowserRouter as Router,
     Switch,
@@ -16,10 +16,22 @@ import CreateBlogPost from './components/CreateBlogPost';
 import EditBlogPost from './components/EditBlogPost';
 import ForgotPassword from './components/ForgotPassword';
 import Profile from './components/Profile';
+import './App.css';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function App() {
     return (
         <div className="App">
+            <ToastContainer
+                position="top-right"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnHover={false}
+                style={{ zIndex: 99999 }} />
             <UserHandler>
                 <Header />
                 <Router>

@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import AuthContext from '../../contexts/AuthContext';
 import Logo from '../Logo/Logo';
 import Navigation from './Navigation';
@@ -6,7 +6,6 @@ import Navigation from './Navigation';
 const Header = () => {
 const { user } = useContext(AuthContext);
 
-console.log('here', user);
     return (
         <header className="header-area in-header">
             <div id="header-sticky" className="menu-area menu-area2">

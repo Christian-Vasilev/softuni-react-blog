@@ -1,8 +1,6 @@
 import {
     request,
     GET,
-    DELETE,
-    PATCH,
     POST
 } from "./requester";
 
