@@ -33,8 +33,8 @@ function App() {
                 pauseOnHover={false}
                 style={{ zIndex: 99999 }} />
             <UserHandler>
-                <Header />
                 <Router>
+                    <Header />
                     <Switch>
                         <Authorized path='/post/create'>
                             <CreateBlogPost />
@@ -51,8 +51,8 @@ function App() {
                         <Route exact path='/:slug' component={BlogPostDetails} />
                         <Route exact path='/' component={Blog} />
                     </Switch>
+                    <Footer />
                 </Router>
-                <Footer />
             </UserHandler>
         </div>
     );

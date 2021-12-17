@@ -3,6 +3,7 @@ import EmailForm from "./partials/EmailForm";
 import PasswordResetForm from "./partials/PasswordResetForm";
 import { useForm } from 'react-hook-form'
 import { passwordEmail, passwordReset } from "../../services/userService";
+import { displayNotification } from "../../utils/helper";
 
 const ForgotPassword = () => {
     const {
@@ -25,14 +26,13 @@ const ForgotPassword = () => {
     const handleFormSubmit = (formData) => {
         formData.token = token;
         const request = ('password' in formData)
-            ? passwordReset()
-            : passwordEmail();
+            ? passwordReset(formData)
+            : passwordEmail(formData);
 
         request.then(response => {
-            if (response.statusText != 'OK') {
-                console.error(response.data.errors);
-            } else {
-                reset()
+            displayNotification(response.message);
+            if (response.success) {
+                reset();
             }
         });
     }

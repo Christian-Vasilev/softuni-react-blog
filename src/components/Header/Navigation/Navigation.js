@@ -1,5 +1,5 @@
+import { Link } from "react-router-dom";
 import { isObjectEmpty } from "../../../utils/helper";
-import NavigationItem from "./NavigationItem/NavigationItem";
 
 const Navigation = ({ user }) => {
     return (
@@ -7,17 +7,17 @@ const Navigation = ({ user }) => {
             <div className="main-menu text-left pl-15">
                 <nav id="mobile-menu">
                     <ul>
-                        <NavigationItem name="Home" href="/" />
+                        <li key={'home'}><Link to="/">Home</Link></li>
                         {!isObjectEmpty(user)
                             ? (
                                 <>
-                                    <NavigationItem name="Profile" href="/profile" />
-                                    <NavigationItem name="Create post" href="/post/create" />
+                                    <li><Link to="/profile">Profile</Link></li>
+                                    <li><Link to="/post/create">Create post</Link></li>
                                 </>
                             ) : (
                                 <>
-                                    <NavigationItem name="Login" href="/login" />
-                                    <NavigationItem name="Register" href="/register" />
+                                    <li><Link to="/login">Login</Link> </li>
+                                    <li><Link to="/register">Register</Link></li>
                                 </>
                             )}
                     </ul>

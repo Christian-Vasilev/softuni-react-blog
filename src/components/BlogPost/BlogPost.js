@@ -1,7 +1,6 @@
 import VideoThumb from "../thumbnails/VideoThumb";
 import MusicThumb from "../thumbnails/MusicThumb";
 import DefaultThumb from "../thumbnails/DefaultThumb";
-import ReactMarkdown from 'react-markdown';
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import AuthContext from "../../contexts/AuthContext";

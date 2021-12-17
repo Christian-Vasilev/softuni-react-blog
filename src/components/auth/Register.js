@@ -1,12 +1,13 @@
 import { useContext } from "react";
-import { useForm } from "react-hook-form";
-import { useHistory } from "react-router-dom";
+import { set, useForm } from "react-hook-form";
+import { Redirect, useHistory } from "react-router-dom";
 import AuthContext from "../../contexts/AuthContext";
 import { register as RegisterUser } from "../../services/userService";
+import { displayNotification, isObjectEmpty } from "../../utils/helper";
 
 const Register = () => {
     const history = useHistory();
-    const { setUser } = useContext(AuthContext);
+    const { user, setUser } = useContext(AuthContext);
 
     const {
         register,
@@ -20,9 +21,23 @@ const Register = () => {
 
         RegisterUser(formData, true)
             .then((response) => {
-                setUser(response.data);
-                history.push('/');
+                if (response.success) {
+                    setUser(response.data);
+                    displayNotification(response.message);
+                    setTimeout(() => {
+                        history.push('/')
+                    }, 2000);
+
+                    return;
+                }
+
+                return displayNotification(response.message);
             });
+    }
+
+
+    if (!isObjectEmpty(user)) {
+        return <Redirect to={{ pathname: '/' }} />
     }
 
     let { password } = watch();

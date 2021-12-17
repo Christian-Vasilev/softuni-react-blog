@@ -1,13 +1,13 @@
-import { Link, useHistory } from "react-router-dom";
+import { Link, Redirect, useHistory } from "react-router-dom";
 import { useForm } from 'react-hook-form';
 import { login } from "../../services/userService";
 import { useContext } from "react";
 import AuthContext from "../../contexts/AuthContext";
-import { displayNotification } from "../../utils/helper";
+import { displayNotification, isObjectEmpty } from "../../utils/helper";
 
 const Login = () => {
     const history = useHistory();
-    const { setUser } = useContext(AuthContext);
+    const { user, setUser } = useContext(AuthContext);
     const {
         register,
         handleSubmit,
@@ -29,6 +29,10 @@ const Login = () => {
                     history.push('/');
                 }, 1000);
             });
+    }
+
+    if (!isObjectEmpty(user)) {
+        return <Redirect to={{ pathname: '/'}} />
     }
 
     return (
