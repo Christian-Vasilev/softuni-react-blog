@@ -13,7 +13,7 @@ const Profile = () => {
     useEffect(() => {
         getAllByUser()
             .then(response => {
-                setPosts(response.data.posts);
+                setPosts(response.posts);
             });
     }, [hasError]);
 

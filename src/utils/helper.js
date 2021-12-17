@@ -5,6 +5,12 @@ export const buildFormDataFromObj = (data, additionalParams = {}) => {
     data = { ...data, ...additionalParams };
 
     Object.keys(data).map((key) => {
+        if (typeof data[key] === 'undefined') {
+            delete data[key];
+
+            return;
+        }
+
         return formData.append(key, data[key]);
     });
 

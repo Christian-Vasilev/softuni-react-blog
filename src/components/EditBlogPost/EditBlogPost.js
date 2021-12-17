@@ -4,7 +4,7 @@ import AuthContext from '../../contexts/AuthContext';
 import { useParams } from 'react-router-dom';
 import BlogPostForm from '../BlogPostForm';
 import { edit, show } from '../../services/postService';
-import { buildFormDataFromObj } from '../../utils/helper';
+import { buildFormDataFromObj, displayNotification } from '../../utils/helper';
 
 const EditBlogPost = () => {
     const { user } = useContext(AuthContext);
@@ -12,16 +12,24 @@ const EditBlogPost = () => {
     const [isPending, setIsPending] = useState(true);
     const { slug } = useParams();
 
-    useEffect((slug) => {
+    useEffect(() => {
         show(slug).then(response => {
-            setArticle(response.data.data);
+            setArticle(response.data);
             setIsPending(false);
         });
-    }, []);
+    }, [slug]);
 
     const handleFormSubmission = (formData) => {
         edit(slug, buildFormDataFromObj(formData, { user_id: user.id }))
-            .then(response => console.log(response));
+            .then(response => {
+                if (response.success) {
+                    displayNotification(response.message);
+
+                    return;
+                }
+
+                displayNotification(response.message);
+            });
     }
 
     return (

@@ -19,10 +19,10 @@ const BlogPostDetails = () => {
     useEffect(() => {
         show(slug)
             .then(response => {
-                setArticle(response.data.data);
+                setArticle(response.data);
                 setIsPending(false);
             })
-    }, [slug]);
+    }, []);
 
     return (
         <>

@@ -10,7 +10,6 @@ const BlogPost = ({
     post: {
         title,
         slug,
-        preview_content: content,
         author,
         thumbnails,
         type,
@@ -43,48 +42,42 @@ const BlogPost = ({
     }
 
     return (
-        <>
-            <div className="bsingle__post mb-50">
-                {blogPostThumb}
-                <div className="bsingle__content">
-                    <div className="meta-info">
-                        <ul>
-                            <li><i className="far fa-calendar-alt"></i>{created_at}</li>
-                            <li><i className="far fa-user"></i>{author.name}</li>
-                            <li><i className="far fa-comments"></i>35 Comments</li>
-                        </ul>
-                    </div>
-                    <h2>{title}</h2>
-                    <ReactMarkdown>{content}</ReactMarkdown>
-                    <div className="slider-btn">
-                        <Link to={`${slug}`} className="btn ss-btn" data-animation="fadeInRight" data-delay=".8s">Read More</Link>
-                    </div>
-                    {handlePostDelete && author.id === user.id || user?.is_admin
-                        ? (
-                            <>
-                                <div className="slider-btn ml-1">
-                                    <Link to={`${slug}/edit`}
-                                        className="btn ss-btn"
-                                        data-animation="fadeInRight"
-                                        data-delay=".8s">
-                                        Edit
-                                    </Link>
-                                </div>
-                                <div className="slider-btn ml-1">
-                                    <button
-                                        className="btn ss-btn"
-                                        onClick={() => handlePostDelete(slug)} style={{ 'backgroundColor': '#fb2f2f' }}
-                                        data-animation="fadeInRight"
-                                        data-delay=".8s">
-                                        Delete
-                                    </button>
-                                </div>
-                            </>
-                        )
-                        : null}
+        <div className="bsingle__post mb-50">
+            <Link to={`${slug}`}>{blogPostThumb}</Link>
+            <div className="bsingle__content">
+                <div className="meta-info">
+                    <ul>
+                        <li><i className="far fa-calendar-alt"></i>{created_at}</li>
+                        <li><i className="far fa-user"></i>{author.name}</li>
+                        <li><i className="far fa-comments"></i>35 Comments</li>
+                    </ul>
                 </div>
+                <Link to={`${slug}`}><h2>{title}</h2></Link>
+                {handlePostDelete && author.id === user.id || user?.is_admin
+                    ? (
+                        <>
+                            <div className="slider-btn ml-1">
+                                <Link to={`${slug}/edit`}
+                                    className="btn ss-btn"
+                                    data-animation="fadeInRight"
+                                    data-delay=".8s">
+                                    Edit
+                                </Link>
+                            </div>
+                            <div className="slider-btn ml-1">
+                                <button
+                                    className="btn ss-btn"
+                                    onClick={() => handlePostDelete(slug)} style={{ 'backgroundColor': '#fb2f2f' }}
+                                    data-animation="fadeInRight"
+                                    data-delay=".8s">
+                                    Delete
+                                </button>
+                            </div>
+                        </>
+                    )
+                    : null}
             </div>
-        </>
+        </div>
     )
 }
 
