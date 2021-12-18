@@ -10,14 +10,14 @@ const BlogPostForm = ({
     handleFormSubmission,
 }) => {
     const [files, setFiles] = useState([]);
-    const [postType, setPostType] = useState(2);
     const {
         register,
         handleSubmit,
         setValue,
+        watch,
         formState: { errors }
     } = useForm();
-
+    let { type: postType } = watch();
     const { getRootProps, getInputProps } = useDropzone({
         accept: 'image/*',
         onDrop: acceptedFiles => {
@@ -59,10 +59,6 @@ const BlogPostForm = ({
     const removeImage = cx({
         'd-none': !files.length,
     });
-
-    const handleTypeChange = (e) => {
-        setPostType(e.target.value);
-    }
 
     const handleFormData = (formData) => {
         return handleFormSubmission(formData);
@@ -132,7 +128,6 @@ const BlogPostForm = ({
 
                                         <div className="col">
                                             <select
-                                                onChange={(e) => handleTypeChange(e)}
                                                 {...register('type')}
                                                 className="form-control">
                                                 <option value="2">Normal</option>
@@ -140,7 +135,7 @@ const BlogPostForm = ({
                                                 <option value="3">Music</option>
                                             </select>
                                         </div>
-                                        {postType !== 2 && (
+                                        {postType != 2 && (
                                             <div className="col">
                                                 <input type="text"
                                                     {...register('resource')}

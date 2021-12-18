@@ -1,8 +1,12 @@
-const DefaultThumb = (props) => {
+import { Link } from "react-router-dom";
+
+const DefaultThumb = ({ coverImageUrl, url }) => {
     return (
-        <div className="bsingle__post-thumb video-p">
-            <img src={props.coverImageUrl} alt="" />
-        </div>
+        <Link to={url}>
+            <div className="bsingle__post-thumb">
+                <img src={coverImageUrl} alt="" />
+            </div>
+        </Link>
     );
 }
 

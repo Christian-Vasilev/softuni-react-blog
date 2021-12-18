@@ -35,14 +35,14 @@ const BlogPost = ({
             />
             break;
         default:
-            blogPostThumb = <DefaultThumb coverImageUrl={thumbnails[0]} />
+            blogPostThumb = <DefaultThumb coverImageUrl={thumbnails[0]} url={slug} />
             break;
 
     }
 
     return (
         <div className="bsingle__post mb-50">
-            <Link to={`${slug}`}>{blogPostThumb}</Link>
+            {blogPostThumb}
             <div className="bsingle__content">
                 <div className="meta-info">
                     <ul>
