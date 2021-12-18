@@ -17,7 +17,7 @@ const BlogPostForm = ({
         watch,
         formState: { errors }
     } = useForm();
-    let { type: postType } = watch();
+    let { type: postType = 2 } = watch();
     const { getRootProps, getInputProps } = useDropzone({
         accept: 'image/*',
         onDrop: acceptedFiles => {
