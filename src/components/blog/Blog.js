@@ -8,14 +8,16 @@ import { displayNotification } from "../../utils/helper";
 import SkeletonBlogPost from "../BlogPost/SkeletonBlogPost";
 
 const Blog = () => {
-    const [posts, setPosts] = useState(null)
+    const [posts, setPosts] = useState([])
+    const [isPending, setIsPending] = useState(true);
     const { user } = useContext(AuthContext);
 
     useEffect(() => {
         getAll().then(response => {
             setPosts(response.data);
+            setIsPending(false);
         });
-    }, [user]);
+    }, []);
 
 
     const handlePostDelete = (slug) => {
@@ -47,7 +49,14 @@ const Blog = () => {
             <section className="inner-blog pt-100 pb-50">
                 <div className="container">
                     <div className="row">
-                        {posts ? (
+                        {!posts.length && !isPending && (
+                            <div className="col-lg-12">
+                                <div className="alrt alert-danger pt-20 pb-20 text-center white-color">
+                                    <h1>There are no posts</h1>
+                                </div>
+                            </div>
+                        )}
+                        {!isPending ? (
                             posts.map((post, index) => (
                                 <div key={index} className="col-lg-6">
                                     <BlogPost post={post} handlePostDelete={handlePostDelete} />
