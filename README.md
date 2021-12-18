@@ -2,7 +2,7 @@
 
 # 🏋️ Hitup.
 
- Demo of the project can be found ➜ [Here](https://thebookcase.herokuapp.com/ "Digital Ocean deployment")
+ Demo of the project can be found ➜ [Here](https://blog.kvasilev.itodorova.dev/ "Digital Ocean deployment")
  
  Here you can motivate yourself by reading successfull stories about people, who once where just as you, a starter.
 
