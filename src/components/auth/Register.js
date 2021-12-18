@@ -22,11 +22,6 @@ const Register = () => {
         RegisterUser(formData)
             .then((response) => {
                 if (response.success) {
-                    setUser(response.data);
-
-                    const { email, password } = formData;
-                    login({ email, password });
-
                     displayNotification(response.message);
 
                     setTimeout(() => {
