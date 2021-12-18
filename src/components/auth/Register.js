@@ -19,7 +19,7 @@ const Register = () => {
     const handleFormSubmit = (formData) => {
         formData.name = `${formData.first_name} ${formData.last_name}`
 
-        RegisterUser(formData, true)
+        RegisterUser(formData)
             .then((response) => {
                 if (response.success) {
                     setUser(response.data);

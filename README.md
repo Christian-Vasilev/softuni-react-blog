@@ -14,6 +14,7 @@
  🔨 Dependencies
 
  ![React](https://img.shields.io/badge/React-17.0.2-blue)
+ ![React Router Dom](https://img.shields.io/badge/react--router--dom-5.3-blue)
  ![React Markdown](https://img.shields.io/badge/react--markdown-7.1.0-blue)
  ![React Toastify](https://img.shields.io/badge/react--toastify-8.1.0-blue)
  ![React Hook Form](https://img.shields.io/badge/react--hook--form-8.20.5-blue)
