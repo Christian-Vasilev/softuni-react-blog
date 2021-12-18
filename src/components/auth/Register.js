@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { set, useForm } from "react-hook-form";
 import { Redirect, useHistory } from "react-router-dom";
 import AuthContext from "../../contexts/AuthContext";
-import { register as RegisterUser } from "../../services/userService";
+import { login, register as RegisterUser } from "../../services/userService";
 import { displayNotification, isObjectEmpty } from "../../utils/helper";
 
 const Register = () => {
@@ -23,7 +23,12 @@ const Register = () => {
             .then((response) => {
                 if (response.success) {
                     setUser(response.data);
+
+                    const { email, password } = formData;
+                    login({ email, password });
+
                     displayNotification(response.message);
+
                     setTimeout(() => {
                         history.push('/')
                     }, 2000);

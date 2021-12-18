@@ -18,17 +18,8 @@ import ForgotPassword from './components/ForgotPassword';
 import Profile from './components/Profile';
 import './App.css';
 import 'react-toastify/dist/ReactToastify.css';
-import { useEffect } from 'react';
-
 
 function App() {
-    useEffect(() => {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth",
-        })
-    }, []);
-
     return (
         <div className="App">
             <ToastContainer
