@@ -8,7 +8,7 @@ const PATCH = 'PATCH';
 const DELETE = 'DELETE';
 
 const httpClient = axios.create({
-    baseURL: 'https://kvasilev.itodorova.dev/',
+    baseURL: 'https://kvasilev.itodorova.dev',
     withCredentials: true,
     origin: true,
 });
